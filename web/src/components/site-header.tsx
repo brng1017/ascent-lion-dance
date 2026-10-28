@@ -1,0 +1,144 @@
+'use client';
+
+import Image from 'next/image';
+import { useRef, useState, useSyncExternalStore } from 'react';
+
+function subscribeToScroll(listener: () => void) {
+  window.addEventListener('scroll', listener, { passive: true });
+  return () => window.removeEventListener('scroll', listener);
+}
+
+function hasScrolled() {
+  return window.scrollY > 0;
+}
+
+const links = [
+  { label: 'Home', href: '#home' },
+  { label: 'About', href: '#about' },
+  { label: 'Services', href: '#services' },
+  { label: 'Join us', href: '#community' },
+];
+
+export function Brand() {
+  return (
+    <a
+      href='/#home'
+      aria-label='Ascent Dragon and Lion Dance home'
+      className='inline-flex shrink-0 items-center gap-3'
+    >
+      <Image
+        src='/images/ascent-logo.png'
+        width={60}
+        height={44}
+        alt=''
+        className='h-11 w-auto object-contain'
+      />
+      <span className='block text-white'>
+        <span className='block font-display text-[23px] leading-none font-normal tracking-[.06em]'>
+          ASCENT
+        </span>
+        <span className='mt-1.5 block text-[8px] leading-none font-medium tracking-[.21em]'>
+          DRAGON &amp; LION DANCE
+        </span>
+      </span>
+    </a>
+  );
+}
+
+export function SiteHeader({ bookingUrl }: { bookingUrl: string }) {
+  const [open, setOpen] = useState(false);
+  const toggle = useRef<HTMLButtonElement>(null);
+  const scrolled = useSyncExternalStore(
+    subscribeToScroll,
+    hasScrolled,
+    () => false,
+  );
+
+  return (
+    <header
+      className={`fixed inset-x-0 top-0 z-40 h-24 motion-safe:transition-[background-color,backdrop-filter] motion-safe:duration-300 ${scrolled ? 'bg-ink/95 backdrop-blur-md' : 'bg-transparent backdrop-blur-none'}`}
+      onKeyDown={(event) => {
+        if (event.key === 'Escape') {
+          setOpen(false);
+          toggle.current?.focus();
+        }
+      }}
+    >
+      <div className='relative mx-auto flex h-full max-w-332 items-center justify-between px-6 lg:px-10'>
+        <Brand />
+        <nav
+          aria-label='Main navigation'
+          className='hidden items-center gap-9 md:flex'
+        >
+          {links.map((link, i) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className={`border-b pb-2 text-[10px] font-medium tracking-[.16em] uppercase transition-colors hover:text-gold ${i === 0 ? 'border-crimson text-white' : 'border-transparent text-white/80'}`}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+        <a
+          href={bookingUrl}
+          className='hidden rounded-full bg-crimson px-6 py-3.5 text-xs font-bold text-white transition-colors hover:bg-crimson-light md:inline-flex'
+        >
+          Book a show{' '}
+          <span aria-hidden='true' className='ml-5'>
+            ↗
+          </span>
+        </a>
+        <button
+          ref={toggle}
+          type='button'
+          aria-expanded={open}
+          aria-controls='mobile-navigation'
+          aria-label={open ? 'Close navigation' : 'Open navigation'}
+          onClick={() => setOpen(!open)}
+          className='flex size-11 items-center justify-center rounded-full border border-white/25 text-white md:hidden'
+        >
+          <svg
+            width='20'
+            height='20'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            strokeWidth='1.5'
+            aria-hidden='true'
+          >
+            {open ? (
+              <path d='m6 6 12 12M6 18 18 6' />
+            ) : (
+              <path d='M3 7h18M3 12h18M3 17h18' />
+            )}
+          </svg>
+        </button>
+        {open && (
+          <nav
+            id='mobile-navigation'
+            aria-label='Mobile navigation'
+            className='absolute top-full right-4 left-4 max-h-[calc(100dvh-6rem)] overflow-y-auto rounded-b-2xl border border-white/15 bg-ink p-6 shadow-2xl md:hidden'
+          >
+            {links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className='block border-b border-white/10 py-4 font-display text-2xl font-normal tracking-wide uppercase'
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              href={bookingUrl}
+              className='mt-5 flex items-center justify-between rounded-full bg-crimson px-5 py-4 font-bold'
+            >
+              Book a show <span aria-hidden='true'>↗</span>
+            </a>
+          </nav>
+        )}
+      </div>
+    </header>
+  );
+}

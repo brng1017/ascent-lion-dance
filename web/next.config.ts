@@ -6,6 +6,15 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   cacheLife: { default: sanity },
   partialPrefetching: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        pathname: "/images/e2taaqx6/**",
+      },
+    ],
+  },
   turbopack: {
     rules: {
       "*.css": {

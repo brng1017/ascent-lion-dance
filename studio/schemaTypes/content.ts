@@ -9,11 +9,14 @@ const contentFields = [
     type: 'slug',
     options: {source: 'title', maxLength: 96},
     description: 'Use a single URL segment, for example about-us or wedding-performances.',
-    validation: (rule) => rule.required().custom((slug) =>
-      !slug?.current || /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug.current)
-        ? true
-        : 'Use lowercase letters, numbers, and hyphens only.',
-    ),
+    validation: (rule) =>
+      rule
+        .required()
+        .custom((slug) =>
+          !slug?.current || /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug.current)
+            ? true
+            : 'Use lowercase letters, numbers, and hyphens only.',
+        ),
   }),
   defineField({name: 'summary', type: 'text', rows: 3}),
   defineField({
@@ -28,7 +31,20 @@ export const performanceService = defineType({
   title: 'Performance Service',
   type: 'document',
   icon: SparklesIcon,
-  fields: contentFields,
+  fields: [
+    ...contentFields,
+    defineField({
+      name: 'tagline',
+      type: 'string',
+      description: 'Short label shown above the service title on the homepage.',
+    }),
+    defineField({
+      name: 'image',
+      type: 'image',
+      options: {hotspot: true},
+      fields: [defineField({name: 'alt', type: 'string', validation: (rule) => rule.required()})],
+    }),
+  ],
   preview: {select: {title: 'title', subtitle: 'summary'}},
 })
 

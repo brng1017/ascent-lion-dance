@@ -15,6 +15,47 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
+export type Sponsor = {
+  _id: string;
+  _type: "sponsor";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  logo?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  website?: string;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
 export type PerformanceService = {
   _id: string;
   _type: "performanceService";
@@ -42,6 +83,15 @@ export type PerformanceService = {
     _type: "block";
     _key: string;
   }>;
+  tagline?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
 };
 
 export type PerformanceServiceReference = {
@@ -91,6 +141,65 @@ export type Slug = {
   source?: string;
 };
 
+export type SponsorReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sponsor";
+};
+
+export type HomePage = {
+  _id: string;
+  _type: "homePage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  eyebrow?: string;
+  heroTitle?: string;
+  heroHighlight?: string;
+  heroDescription?: string;
+  heroImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  occasions?: Array<string>;
+  storyHeading?: string;
+  storyText?: string;
+  storyUrl?: string;
+  sponsors?: Array<
+    {
+      _key: string;
+    } & SponsorReference
+  >;
+  servicesHeading?: string;
+  servicesDescription?: string;
+  featuredServices?: Array<
+    {
+      _key: string;
+    } & PerformanceServiceReference
+  >;
+  communityHeading?: string;
+  communityText?: string;
+  communityImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  bookingHeading?: string;
+  bookingDescription?: string;
+  bookingUrl?: string;
+  email?: string;
+  phone?: string;
+  instagramUrl?: string;
+};
+
 export type SanityImagePaletteSwatch = {
   _type: "sanity.imagePaletteSwatch";
   background?: string;
@@ -127,22 +236,6 @@ export type SanityImageMetadata = {
   thumbHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
 };
 
 export type SanityFileAsset = {
@@ -205,20 +298,83 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | SanityImageAssetReference
+  | Sponsor
+  | SanityImageCrop
+  | SanityImageHotspot
   | PerformanceService
   | PerformanceServiceReference
   | Page
   | Slug
+  | SponsorReference
+  | HomePage
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
   | SanityImageMetadata
-  | SanityImageHotspot
-  | SanityImageCrop
   | SanityFileAsset
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint;
+
+// Source: ../web/src/sanity/queries.ts
+// Variable: HOME_PAGE_QUERY
+// Query: *[_type == "homePage" && _id == "homePage"][0] {    eyebrow, heroTitle, heroHighlight, heroDescription,    heroImage {asset, alt, hotspot, crop},    storyHeading, storyText, storyUrl, servicesHeading, servicesDescription,    sponsors[]->{_id, name, website, logo {asset, alt, hotspot, crop}},    featuredServices[]->{      _id, title, tagline, summary, "slug": slug.current,      image {asset, alt, hotspot, crop}    },    communityHeading, communityText,    communityImage {asset, alt, hotspot, crop},    bookingHeading, bookingDescription, bookingUrl, email, phone, instagramUrl  }
+export type HOME_PAGE_QUERY_RESULT = {
+  eyebrow: string | null;
+  heroTitle: string | null;
+  heroHighlight: string | null;
+  heroDescription: string | null;
+  heroImage: {
+    asset: SanityImageAssetReference | null;
+    alt: string | null;
+    hotspot: SanityImageHotspot | null;
+    crop: SanityImageCrop | null;
+  } | null;
+  storyHeading: string | null;
+  storyText: string | null;
+  storyUrl: string | null;
+  servicesHeading: string | null;
+  servicesDescription: string | null;
+  sponsors: Array<{
+    _id: string;
+    name: string | null;
+    website: string | null;
+    logo: {
+      asset: SanityImageAssetReference | null;
+      alt: string | null;
+      hotspot: SanityImageHotspot | null;
+      crop: SanityImageCrop | null;
+    } | null;
+  }> | null;
+  featuredServices: Array<{
+    _id: string;
+    title: string | null;
+    tagline: string | null;
+    summary: string | null;
+    slug: string | null;
+    image: {
+      asset: SanityImageAssetReference | null;
+      alt: string | null;
+      hotspot: SanityImageHotspot | null;
+      crop: SanityImageCrop | null;
+    } | null;
+  }> | null;
+  communityHeading: string | null;
+  communityText: string | null;
+  communityImage: {
+    asset: SanityImageAssetReference | null;
+    alt: string | null;
+    hotspot: SanityImageHotspot | null;
+    crop: SanityImageCrop | null;
+  } | null;
+  bookingHeading: string | null;
+  bookingDescription: string | null;
+  bookingUrl: string | null;
+  email: string | null;
+  phone: string | null;
+  instagramUrl: string | null;
+} | null;
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: CONTENT_INDEX_QUERY
@@ -301,6 +457,7 @@ export type SERVICE_QUERY_RESULT = {
 // Query TypeMap
 declare global {
   interface SanityQueries {
+    '\n  *[_type == "homePage" && _id == "homePage"][0] {\n    eyebrow, heroTitle, heroHighlight, heroDescription,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, storyUrl, servicesHeading, servicesDescription,\n    sponsors[]->{_id, name, website, logo {asset, alt, hotspot, crop}},\n    featuredServices[]->{\n      _id, title, tagline, summary, "slug": slug.current,\n      image {asset, alt, hotspot, crop}\n    },\n    communityHeading, communityText,\n    communityImage {asset, alt, hotspot, crop},\n    bookingHeading, bookingDescription, bookingUrl, email, phone, instagramUrl\n  }\n': HOME_PAGE_QUERY_RESULT;
     '{\n  "pages": *[_type == "page" && defined(slug.current)] | order(title asc) {\n    _id, title, summary, "slug": slug.current\n  },\n  "services": *[_type == "performanceService" && defined(slug.current)] | order(title asc) {\n    _id, title, summary, "slug": slug.current\n  }\n}': CONTENT_INDEX_QUERY_RESULT;
     '\n  *[_type == "page" && slug.current == $slug][0] {\n    _id, title, summary, body,\n    services[]->{_id, title, summary, "slug": slug.current}\n  }\n': PAGE_QUERY_RESULT;
     '\n  *[_type == "performanceService" && slug.current == $slug][0] {\n    _id, title, summary, body\n  }\n': SERVICE_QUERY_RESULT;
