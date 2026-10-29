@@ -1,5 +1,13 @@
 import { defineQuery } from "next-sanity";
 
+export const JOIN_PAGE_QUERY = defineQuery(`
+  *[_type == "joinPage" && _id == "joinPage"][0] {
+    eyebrow, heroTitle, heroHighlight,
+    heroImage {asset, alt, hotspot, crop},
+    storyHeading, storyText, contactHeading, contactText, email
+  }
+`);
+
 export const ABOUT_PAGE_QUERY = defineQuery(`
   *[_type == "aboutPage" && _id == "aboutPage"][0] {
     eyebrow, heroTitle, heroHighlight,

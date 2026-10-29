@@ -255,12 +255,12 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
               <p className='mt-5 font-body text-[13px] leading-7 text-white/65'>
                 {home.communityText}
               </p>
-              <a
-                href={`mailto:${home.email}?subject=Joining%20the%20Ascent%20team`}
+              <Link
+                href='/join'
                 className='mt-7 inline-flex w-fit items-center gap-8 text-xs font-semibold text-gold'
               >
                 Find your place with us <Arrow />
-              </a>
+              </Link>
             </div>
           </section>
 

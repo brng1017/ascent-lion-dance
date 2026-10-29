@@ -31,7 +31,7 @@ export async function SiteFooter() {
           <Link href="/services" className="hover:text-gold">
             Our services
           </Link>
-          <Link href="/#community" className="hover:text-gold">
+          <Link href="/join" className="hover:text-gold">
             Join the team
           </Link>
           <a href={home.bookingUrl} className="hover:text-gold">

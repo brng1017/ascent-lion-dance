@@ -109,6 +109,17 @@ Run `npx sanity exec scripts/create-about-page.ts --with-user-token` from `studi
 to seed a missing draft; existing content is preserved. The shared footer still
 uses global contact content from Home Page.
 
+The **Join Page** singleton manages `/join` independently. It has the same hero
+fields as the other pages, a short introduction heading and text, and a contact
+heading, text, and team email. The page uses the shared hero, fixed booking
+action, and fixed email button label. Search metadata stays in code.
+
+Review and publish Join Page to display its content and photograph. Until then,
+the page uses its own starter copy and no hero photograph. Its seed script copies
+the homepage hero image reference once; later homepage changes do not affect it.
+Run `npx sanity exec scripts/create-join-page.ts --with-user-token` from `studio`
+to seed a missing draft. Existing Join Page content is preserved.
+
 Three sample documents were created as drafts for review in Studio. Edit their
 placeholder copy and publish when ready. Unpublished drafts do not appear on the
 website; draft previews and Visual Editing are not configured.

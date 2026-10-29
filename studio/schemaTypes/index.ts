@@ -3,5 +3,14 @@ import {homePage} from './homePage'
 import {sponsor} from './sponsor'
 import {servicesPage} from './servicesPage'
 import {aboutPage} from './aboutPage'
+import {joinPage} from './joinPage'
 
-export const schemaTypes = [homePage, aboutPage, servicesPage, page, performanceService, sponsor]
+export const schemaTypes = [
+  homePage,
+  aboutPage,
+  servicesPage,
+  joinPage,
+  page,
+  performanceService,
+  sponsor,
+]

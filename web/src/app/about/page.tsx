@@ -22,7 +22,6 @@ export default async function AboutPage() {
   const communityImage = content?.communityImage?.asset
     ? imageUrl(content.communityImage, 1200, 1000)
     : null;
-  const email = page.email ?? aboutDefaults.email;
 
   return (
     <>
@@ -127,12 +126,12 @@ export default async function AboutPage() {
             <p className='mt-5 font-body text-[13px] leading-7 text-white/65'>
               {page.communityText}
             </p>
-            <a
-              href={`mailto:${email}?subject=Joining%20the%20Ascent%20team`}
+            <Link
+              href='/join'
               className='mt-7 inline-flex min-h-11 w-fit items-center gap-6 text-xs font-semibold text-gold hover:text-white'
             >
               Join our story <span aria-hidden='true'>↗</span>
-            </a>
+            </Link>
           </div>
         </section>
 

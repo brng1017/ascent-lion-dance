@@ -141,6 +141,30 @@ export type Slug = {
   source?: string;
 };
 
+export type JoinPage = {
+  _id: string;
+  _type: "joinPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  eyebrow?: string;
+  heroTitle?: string;
+  heroHighlight?: string;
+  heroImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  storyHeading?: string;
+  storyText?: string;
+  contactHeading?: string;
+  contactText?: string;
+  email?: string;
+};
+
 export type ServicesPage = {
   _id: string;
   _type: "servicesPage";
@@ -371,6 +395,7 @@ export type AllSanitySchemaTypes =
   | PerformanceServiceReference
   | Page
   | Slug
+  | JoinPage
   | ServicesPage
   | AboutPage
   | SponsorReference
@@ -383,6 +408,26 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint;
+
+// Source: ../web/src/sanity/queries.ts
+// Variable: JOIN_PAGE_QUERY
+// Query: *[_type == "joinPage" && _id == "joinPage"][0] {    eyebrow, heroTitle, heroHighlight,    heroImage {asset, alt, hotspot, crop},    storyHeading, storyText, contactHeading, contactText, email  }
+export type JOIN_PAGE_QUERY_RESULT = {
+  eyebrow: string | null;
+  heroTitle: string | null;
+  heroHighlight: string | null;
+  heroImage: {
+    asset: SanityImageAssetReference | null;
+    alt: string | null;
+    hotspot: SanityImageHotspot | null;
+    crop: SanityImageCrop | null;
+  } | null;
+  storyHeading: string | null;
+  storyText: string | null;
+  contactHeading: string | null;
+  contactText: string | null;
+  email: string | null;
+} | null;
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: ABOUT_PAGE_QUERY
@@ -594,6 +639,7 @@ export type SERVICES_QUERY_RESULT = Array<{
 // Query TypeMap
 declare global {
   interface SanityQueries {
+    '\n  *[_type == "joinPage" && _id == "joinPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, contactHeading, contactText, email\n  }\n': JOIN_PAGE_QUERY_RESULT;
     '\n  *[_type == "aboutPage" && _id == "aboutPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, valuesIntroduction, valuesHeading,\n    values[]{_key, title, text},\n    communityHeading, communityText,\n    communityImage {asset, alt, hotspot, crop},\n    bookingHeading, bookingDescription, email\n  }\n': ABOUT_PAGE_QUERY_RESULT;
     '\n  *[_type == "servicesPage" && _id == "servicesPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    bookingSteps[]{_key, title, description}\n  }\n': SERVICES_PAGE_QUERY_RESULT;
     '\n  *[_type == "homePage" && _id == "homePage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, storyUrl, servicesHeading, servicesDescription,\n    sponsors[]->{_id, name, website, logo {asset, alt, hotspot, crop}},\n    featuredServices[]->{\n      _id, title, tagline, summary, "slug": slug.current,\n      image {asset, alt, hotspot, crop}\n    },\n    communityHeading, communityText,\n    communityImage {asset, alt, hotspot, crop},\n    bookingHeading, bookingDescription, email, phone, instagramUrl\n  }\n': HOME_PAGE_QUERY_RESULT;

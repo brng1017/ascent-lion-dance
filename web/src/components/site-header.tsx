@@ -19,7 +19,7 @@ const links = [
   { label: 'Home', href: '/#home' },
   { label: 'About', href: '/about' },
   { label: 'Services', href: '/services' },
-  { label: 'Join us', href: '/#community' },
+  { label: 'Join us', href: '/join' },
 ];
 
 export function Brand() {
