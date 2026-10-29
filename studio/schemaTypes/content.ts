@@ -34,6 +34,14 @@ export const performanceService = defineType({
   fields: [
     ...contentFields,
     defineField({
+      name: 'eventTypeLabel',
+      title: 'Event type label',
+      type: 'string',
+      description:
+        'Singular label for the booking form, for example Birthday, Grand Opening, or Wedding. The service title stays unchanged.',
+      validation: (rule) => rule.required().max(80),
+    }),
+    defineField({
       name: 'tagline',
       type: 'string',
       description: 'Short label shown above the service title on the homepage.',

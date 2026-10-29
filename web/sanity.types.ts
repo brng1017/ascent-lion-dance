@@ -83,6 +83,7 @@ export type PerformanceService = {
     _type: "block";
     _key: string;
   }>;
+  eventTypeLabel?: string;
   tagline?: string;
   image?: {
     asset?: SanityImageAssetReference;
@@ -621,10 +622,11 @@ export type SERVICE_QUERY_RESULT = {
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: SERVICES_QUERY
-// Query: *[_type == "performanceService" && defined(slug.current)] | order(title asc) {    _id, title, tagline, summary, "slug": slug.current,    image {asset, alt, hotspot, crop}  }
+// Query: *[_type == "performanceService" && defined(slug.current)] | order(title asc) {    _id, title, eventTypeLabel, tagline, summary, "slug": slug.current,    image {asset, alt, hotspot, crop}  }
 export type SERVICES_QUERY_RESULT = Array<{
   _id: string;
   title: string | null;
+  eventTypeLabel: string | null;
   tagline: string | null;
   summary: string | null;
   slug: string | null;
@@ -646,7 +648,7 @@ declare global {
     '{\n  "pages": *[_type == "page" && defined(slug.current)] | order(title asc) {\n    _id, title, summary, "slug": slug.current\n  },\n  "services": *[_type == "performanceService" && defined(slug.current)] | order(title asc) {\n    _id, title, summary, "slug": slug.current\n  }\n}': CONTENT_INDEX_QUERY_RESULT;
     '\n  *[_type == "page" && slug.current == $slug][0] {\n    _id, title, summary, body,\n    services[]->{_id, title, summary, "slug": slug.current}\n  }\n': PAGE_QUERY_RESULT;
     '\n  *[_type == "performanceService" && slug.current == $slug][0] {\n    _id, title, summary, body\n  }\n': SERVICE_QUERY_RESULT;
-    '\n  *[_type == "performanceService" && defined(slug.current)] | order(title asc) {\n    _id, title, tagline, summary, "slug": slug.current,\n    image {asset, alt, hotspot, crop}\n  }\n': SERVICES_QUERY_RESULT;
+    '\n  *[_type == "performanceService" && defined(slug.current)] | order(title asc) {\n    _id, title, eventTypeLabel, tagline, summary, "slug": slug.current,\n    image {asset, alt, hotspot, crop}\n  }\n': SERVICES_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too

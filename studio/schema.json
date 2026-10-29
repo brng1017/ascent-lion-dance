@@ -458,6 +458,13 @@
         },
         "optional": true
       },
+      "eventTypeLabel": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "tagline": {
         "type": "objectAttribute",
         "value": {

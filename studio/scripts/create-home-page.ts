@@ -13,8 +13,7 @@ const imageSources: Record<string, string> = {
   grandOpening: '/static/d1e0e0ee870bf542be005a9f6cc86c03/4e7ce/whatis.jpg',
   performance: '/static/90297e0e62602d00ac7036c244ca3735/755f3/hero-01.jpg',
   celebration: '/static/6f3de9edeef09165ed4030c3b189e173/942c2/hero-02.jpg',
-  lunarNewYear:
-    '/static/2b3aa8786fbe4aad8dfe3ae488ae0f03/4e7ce/services-01.jpg',
+  lunarNewYear: '/static/2b3aa8786fbe4aad8dfe3ae488ae0f03/4e7ce/services-01.jpg',
   wedding: '/static/474a8820d393e246ac852e0441519887/f8d6b/services-02.jpg',
   community: '/static/3aeed0dc344f4b4e5d83d07937fb486e/755f3/about-01.jpg',
 }
@@ -61,6 +60,7 @@ async function main() {
         _id: 'drafts.',
         _type: 'performanceService',
         title: service.title,
+        eventTypeLabel: service.eventTypeLabel,
         slug: {_type: 'slug', current: service.slug},
         tagline: service.tagline,
         summary: service.summary,
@@ -81,7 +81,10 @@ async function main() {
       console.log(`Created service draft: ${service.title}`)
     } else if (id.startsWith('drafts.')) {
       // Add only missing display fields, preserving the existing title and copy.
-      await client.patch(id).setIfMissing({image, tagline: service.tagline}).commit()
+      await client
+        .patch(id)
+        .setIfMissing({image, tagline: service.tagline, eventTypeLabel: service.eventTypeLabel})
+        .commit()
       if (
         (service.slug === 'banquets-events' && existing?.title === 'Banquets & Events') ||
         (service.slug === 'wedding-performances' && existing?.title === 'Wedding Performances')

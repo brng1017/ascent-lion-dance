@@ -32,6 +32,7 @@ export const sponsorDefaults = [
 export const serviceDefaults = [
   {
     title: "Lunar New Year",
+    eventTypeLabel: "Lunar New Year",
     slug: "lunar-new-year",
     tagline: "Welcome good fortune",
     summary:
@@ -39,6 +40,7 @@ export const serviceDefaults = [
   },
   {
     title: "Grand Openings",
+    eventTypeLabel: "Grand Opening",
     slug: "grand-openings",
     tagline: "Start something extraordinary",
     summary:
@@ -46,6 +48,7 @@ export const serviceDefaults = [
   },
   {
     title: "Weddings",
+    eventTypeLabel: "Wedding",
     slug: "wedding-performances",
     tagline: "Celebrate your next chapter",
     summary:
@@ -53,6 +56,7 @@ export const serviceDefaults = [
   },
   {
     title: "Banquets",
+    eventTypeLabel: "Banquet",
     slug: "banquets-events",
     tagline: "Make it a celebration",
     summary:
@@ -60,6 +64,7 @@ export const serviceDefaults = [
   },
   {
     title: "Birthdays",
+    eventTypeLabel: "Birthday",
     slug: "birthdays",
     tagline: "Another year, more joy",
     summary:
@@ -67,6 +72,7 @@ export const serviceDefaults = [
   },
   {
     title: "Company Events",
+    eventTypeLabel: "Company Event",
     slug: "company-events",
     tagline: "Bring your team together",
     summary:

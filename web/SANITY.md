@@ -47,6 +47,9 @@ to manage the carousel; publish the services and updated homepage when ready.
 
 Booking buttons use the shared URL and labels in `src/config/site.ts`.
 These fixed settings are not editable in Sanity and are consistent across pages.
+The booking destination is `/book`, with event choices from Performance Service
+documents and delivery through EmailJS. See `BOOKING.md` for deployment settings
+and the email template mapping. Booking requests are not saved in Sanity.
 Hero and service photographs can be replaced and cropped directly in Studio.
 All homepage photographs come from Sanity; there are no local photo fallbacks.
 Without an image, the hero keeps its dark background, a service card shows its
@@ -65,6 +68,9 @@ Vision Auto, and Re/Max. Publish sponsor documents first, then the updated homep
 
 - **Website Page**: title, slug, summary, rich text, and references to performance services.
 - **Performance Service**: title, slug, summary, and rich text.
+- **Event type label** on each Performance Service provides the singular booking
+  form option, such as Wedding or Grand Opening. It does not change service titles
+  on the homepage or services page. Publish label edits to update the booking form.
 - `/` lists published pages and services.
 - `/pages/[slug]` renders a website page.
 - `/services/[slug]` renders a performance service.

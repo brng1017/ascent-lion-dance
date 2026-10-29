@@ -68,7 +68,7 @@ export const SERVICE_QUERY = defineQuery(`
 
 export const SERVICES_QUERY = defineQuery(`
   *[_type == "performanceService" && defined(slug.current)] | order(title asc) {
-    _id, title, tagline, summary, "slug": slug.current,
+    _id, title, eventTypeLabel, tagline, summary, "slug": slug.current,
     image {asset, alt, hotspot, crop}
   }
 `);
