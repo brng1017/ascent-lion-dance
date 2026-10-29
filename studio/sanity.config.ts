@@ -17,15 +17,21 @@ export default defineConfig({
           .title('Website content')
           .items([
             S.listItem().singleton('homePage'),
+            S.listItem().singleton('servicesPage'),
             S.divider(),
-            ...S.documentTypeListItems().filter((item) => item.getId() !== 'homePage'),
+            ...S.documentTypeListItems().filter(
+              (item) => !['homePage', 'servicesPage'].includes(item.getId() ?? ''),
+            ),
           ]),
     }),
     visionTool(),
   ],
 
   document: {
-    singletons: [defineSingleton({documentId: 'homePage', schemaType: 'homePage'})],
+    singletons: [
+      defineSingleton({documentId: 'homePage', schemaType: 'homePage'}),
+      defineSingleton({documentId: 'servicesPage', schemaType: 'servicesPage'}),
+    ],
   },
 
   schema: {

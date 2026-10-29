@@ -1,0 +1,217 @@
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import { SiteHeader } from '@/components/site-header';
+import { siteConfig } from '@/config/site';
+import { getHomePage, getServices, getServicesPage } from '@/sanity/content';
+import { serviceDefaults } from '@/sanity/home-defaults';
+import { servicesDefaults } from '@/sanity/services-defaults';
+import { imageUrl } from '@/sanity/image';
+
+export const metadata: Metadata = {
+  title: 'Our Services | Ascent Dragon & Lion Dance',
+  description:
+    'Celebrate Lunar New Year, grand openings, weddings, banquets, birthdays, and company events with Ascent Lion Dance in Denver.',
+};
+
+function Arrow() {
+  return (
+    <svg
+      aria-hidden='true'
+      viewBox='0 0 24 24'
+      fill='none'
+      stroke='currentColor'
+      strokeWidth='1.5'
+      className='size-4'
+    >
+      <path d='M4 12h16m-6-6 6 6-6 6' />
+    </svg>
+  );
+}
+
+export default async function ServicesPage() {
+  const [home, publishedServices, content] = await Promise.all([
+    getHomePage(),
+    getServices(),
+    getServicesPage(),
+  ]);
+  const page = content ?? servicesDefaults;
+  const bookingUrl = siteConfig.bookingUrl;
+  const bookingSteps = servicesDefaults.bookingSteps.map(
+    (fallback, index) => page.bookingSteps?.[index] ?? fallback,
+  );
+  const heroPhoto = content ? content.heroImage : home?.heroImage;
+  const heroImage = heroPhoto?.asset ? imageUrl(heroPhoto, 1920, 1280) : null;
+  const featuredIds = (home?.featuredServices ?? []).flatMap((service) =>
+    service ? [service._id] : [],
+  );
+  const featuredOrder = new Map(featuredIds.map((id, index) => [id, index]));
+  const services = publishedServices.length
+    ? [...publishedServices]
+        .sort(
+          (a, b) =>
+            (featuredOrder.get(a._id) ?? featuredIds.length) -
+            (featuredOrder.get(b._id) ?? featuredIds.length),
+        )
+        .map((service) => ({
+          id: service._id,
+          title: service.title ?? 'Lion dance performance',
+          summary: service.summary,
+          image: service.image?.asset
+            ? imageUrl(service.image, 1200, 850)
+            : null,
+          imageAlt: service.image?.alt ?? service.title ?? '',
+        }))
+    : serviceDefaults.map((service) => ({
+        id: service.slug,
+        title: service.title,
+        summary: service.summary,
+        image: null,
+        imageAlt: '',
+      }));
+
+  return (
+    <>
+      <a
+        href='#main-content'
+        className='sr-only z-50 rounded-lg bg-gold px-5 py-3 font-bold text-ink focus:not-sr-only focus:fixed focus:top-3 focus:left-3'
+      >
+        Skip to content
+      </a>
+      <SiteHeader />
+      <main id='main-content'>
+        <div id='home' className='relative isolate overflow-clip bg-ink pt-24'>
+          {heroImage && (
+            <div className='absolute inset-0 -z-10'>
+              <Image
+                src={heroImage}
+                alt={heroPhoto?.alt ?? ''}
+                fill
+                loading='eager'
+                fetchPriority='high'
+                sizes='100vw'
+                className='object-cover object-[64%_center] lg:object-[center_47%]'
+              />
+              <div className='absolute inset-0 bg-black/60' />
+            </div>
+          )}
+          <section
+            aria-labelledby='services-heading'
+            className='relative mx-auto flex min-h-162.5 max-w-332 flex-col justify-center px-6 pt-14 pb-24 md:min-h-175 lg:px-10 lg:pt-16 lg:pb-28'
+          >
+            {page.eyebrow && (
+              <p className='mb-7 flex items-center gap-3 text-[10px] font-semibold tracking-[.2em] text-gold uppercase sm:text-xs'>
+                <span className='h-px w-8 bg-gold' aria-hidden='true' />
+                {page.eyebrow}
+              </p>
+            )}
+            <h1
+              id='services-heading'
+              className='font-display text-[clamp(4.75rem,18vw,11.5rem)] leading-[.95] font-normal tracking-tight uppercase'
+            >
+              {page.heroTitle}
+              <br />
+              <span className='text-gold'>{page.heroHighlight}</span>
+            </h1>
+            <a
+              href={bookingUrl}
+              className='mt-9 inline-flex min-h-12 w-fit items-center gap-8 rounded-full bg-crimson px-7 py-4 text-xs font-bold transition-colors hover:bg-crimson-light'
+            >
+              {siteConfig.bookingLabel} <Arrow />
+            </a>
+          </section>
+        </div>
+
+        <section
+          aria-label='Our performance services'
+          className='mx-auto max-w-312 space-y-16 px-6 py-20 md:space-y-20 md:py-24 lg:px-10 lg:py-28'
+        >
+          {services.map((service, index) => (
+            <article
+              key={service.id}
+              aria-labelledby={`service-${service.id}`}
+              className='grid items-center gap-8 md:grid-cols-2 md:gap-14 lg:gap-20'
+            >
+              <div
+                className={`relative aspect-[1.4] overflow-hidden rounded-2xl bg-ink-light ${index % 2 ? 'md:order-2' : ''}`}
+              >
+                {service.image ? (
+                  <Image
+                    src={service.image}
+                    alt={service.imageAlt}
+                    fill
+                    sizes='(max-width: 767px) 100vw, 50vw'
+                    className='object-cover'
+                  />
+                ) : (
+                  <div
+                    aria-hidden='true'
+                    className='absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent,transparent_12px,#ffffff05_12px,#ffffff05_24px)]'
+                  />
+                )}
+              </div>
+              <div className={index % 2 ? 'md:order-1' : ''}>
+                <p
+                  className='mb-4 text-[10px] font-bold tracking-[.2em] text-gold'
+                  aria-hidden='true'
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </p>
+                <h2
+                  id={`service-${service.id}`}
+                  className='font-display text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.08] uppercase'
+                >
+                  {service.title}
+                </h2>
+                {service.summary && (
+                  <p className='mt-5 max-w-md font-body text-sm leading-7 text-white/75'>
+                    {service.summary}
+                  </p>
+                )}
+                <a
+                  href={bookingUrl}
+                  aria-label={`${siteConfig.serviceRequestLabel}: ${service.title}`}
+                  className='mt-7 inline-flex min-h-11 items-center gap-6 rounded-full border border-white/25 px-5 py-3 text-[11px] font-bold transition-colors hover:border-gold hover:text-gold'
+                >
+                  {siteConfig.serviceRequestLabel} <Arrow />
+                </a>
+              </div>
+            </article>
+          ))}
+        </section>
+
+        <section
+          aria-label='Planning your performance'
+          className='mx-auto grid max-w-312 gap-5 px-6 pb-20 md:grid-cols-3 lg:px-10 lg:pb-28'
+        >
+          {bookingSteps.map((step, index) => (
+            <div
+              key={step._key}
+              className='rounded-2xl border border-white/5 bg-ink-light p-7 lg:p-8'
+            >
+              <p
+                className='mb-10 font-display text-4xl text-crimson'
+                aria-hidden='true'
+              >
+                {String(index + 1).padStart(2, '0')}
+              </p>
+              <h2 className='font-display text-2xl uppercase'>{step.title}</h2>
+              {step.description && (
+                <p className='mt-4 font-body text-sm leading-7 text-white/70'>
+                  {step.description}
+                </p>
+              )}
+              {index === 0 && (
+                <a
+                  href={bookingUrl}
+                  className='mt-6 inline-flex min-h-11 items-center gap-5 text-xs font-bold text-gold hover:text-white'
+                >
+                  Plan your event <Arrow />
+                </a>
+              )}
+            </div>
+          ))}
+        </section>
+      </main>
+    </>
+  );
+}

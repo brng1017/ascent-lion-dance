@@ -29,14 +29,13 @@ On Windows with restricted PowerShell script execution, use `npm.cmd` and
 
 The homepage has a dedicated **Home Page** singleton at the top of the Studio
 sidebar. It contains hero copy and photography, the story,
-featured service references, community content, booking URL, and contact details.
+featured service references, community content, booking copy, and contact details.
 The new homepage and additional service documents are drafts for review. The
 frontend uses matching starter content from `src/sanity/home-defaults.ts` until
 the Home Page is published. Publish featured services first, then Home Page.
 Saving edits creates a draft; the public website only reads published documents.
-Use **Publish** on Home Page to apply a new hero image or other edits. Clearing
-the hero description on a published homepage hides it instead of restoring the
-starter copy. Draft previews are not configured.
+Use **Publish** on Home Page to apply a new hero image or other edits.
+Draft previews are not configured.
 Only published references link to service detail routes; starter service cards
 lead to the existing Ascent booking form.
 
@@ -46,8 +45,8 @@ four-item limit. Starter categories are Lunar New Year, Grand Openings, Weddings
 Banquets, Birthdays, and Company Events. Add or reorder references in Home Page
 to manage the carousel; publish the services and updated homepage when ready.
 
-The booking buttons currently use `https://ascentliondance.org/book/`; change
-the Home Page booking URL in Studio when a replacement booking flow is available.
+Booking buttons use the shared URL and labels in `src/config/site.ts`.
+These fixed settings are not editable in Sanity and are consistent across pages.
 Hero and service photographs can be replaced and cropped directly in Studio.
 All homepage photographs come from Sanity; there are no local photo fallbacks.
 Without an image, the hero keeps its dark background, a service card shows its
@@ -69,6 +68,31 @@ Vision Auto, and Re/Max. Publish sponsor documents first, then the updated homep
 - `/` lists published pages and services.
 - `/pages/[slug]` renders a website page.
 - `/services/[slug]` renders a performance service.
+
+The `/services` page lists all published performance services, using their titles,
+summaries, and images. Homepage featured services appear first, in their chosen
+order; additional services follow alphabetically. The six starter categories
+appear when no services are published.
+
+The **Services Page** singleton manages this page's hero introduction, headline,
+photograph, and exactly three booking steps: Send a request, We
+confirm, and We perform. Each step has an editable title and description.
+Service listings continue to use Performance Service documents. Clearing the
+published hero image removes it. Button labels and the booking
+URL are fixed in shared site configuration; search metadata is fixed in the
+route. The first step always has a "Plan your event" button. There is no
+included-items panel. Home Page and Services Page use matching hero field names
+and the same fixed "Book a show" action.
+
+A sample Services Page draft contains the current copy and a copy of the homepage
+hero image reference. Review it in Studio, then publish it to apply changes to
+the public `/services` page. Until then, matching starter copy and the homepage
+hero image are used. Later edits to the Services Page hero are independent of
+the homepage. Rerun `npx sanity exec scripts/create-services-page.ts --with-user-token`
+from `studio` if needed; the script preserves an existing Services Page.
+The one-time `scripts/simplify-page-content.ts` cleanup removes the old settings
+from saved page documents and adds the third booking step to a draft without
+publishing editorial changes.
 
 Three sample documents were created as drafts for review in Studio. Edit their
 placeholder copy and publish when ready. Unpublished drafts do not appear on the

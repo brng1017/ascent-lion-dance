@@ -1,11 +1,13 @@
 import { Brand } from "./site-header";
+import { siteConfig } from "@/config/site";
+import Link from "next/link";
 import { getHomePage } from "@/sanity/content";
 import { homeDefaults } from "@/sanity/home-defaults";
 
 export async function SiteFooter() {
   const content = await getHomePage();
   const home = {
-    bookingUrl: content?.bookingUrl ?? homeDefaults.bookingUrl,
+    bookingUrl: siteConfig.bookingUrl,
     email: content?.email ?? homeDefaults.email,
     phone: content?.phone ?? homeDefaults.phone,
     instagramUrl: content?.instagramUrl ?? homeDefaults.instagramUrl,
@@ -23,17 +25,17 @@ export async function SiteFooter() {
           aria-label="Footer navigation"
           className="grid grid-cols-2 gap-x-12 gap-y-4 text-xs text-white/70 sm:gap-x-20"
         >
-          <a href="/#about" className="hover:text-gold">
+          <Link href="/#about" className="hover:text-gold">
             Our story
-          </a>
-          <a href="/#services" className="hover:text-gold">
+          </Link>
+          <Link href="/services" className="hover:text-gold">
             Our services
-          </a>
-          <a href="/#community" className="hover:text-gold">
+          </Link>
+          <Link href="/#community" className="hover:text-gold">
             Join the team
-          </a>
+          </Link>
           <a href={home.bookingUrl} className="hover:text-gold">
-            Book a show
+            {siteConfig.bookingLabel}
           </a>
         </nav>
         <div className="space-y-3 text-xs text-white/70">

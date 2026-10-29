@@ -4,8 +4,6 @@ export const homeDefaults = {
   eyebrow: "Denver, Colorado · Dragon & Lion Dance",
   heroTitle: "Rise",
   heroHighlight: "Above.",
-  heroDescription:
-    "Rooted in tradition. Made for your moment. Bring the energy, color, and spirit of lion dance to your next celebration.",
   storyHeading: "Honoring tradition.\nStriving for excellence.",
   storyText:
     "At Ascent, we bring the spirit of lion dance to life with energy, precision, and passion. Rooted in tradition, our performances celebrate prosperity, strength, and cultural heritage.\n\nFrom Lunar New Year celebrations to life’s biggest milestones, we bring people together through powerful movement and the beat of the drum.",
@@ -19,7 +17,6 @@ export const homeDefaults = {
   bookingHeading: "Ready to make\nyour event roar?",
   bookingDescription:
     "Tell us what you’re celebrating. Let’s create a performance your guests will remember.",
-  bookingUrl: "https://ascentliondance.org/book/",
   email: "ascentmualan@gmail.com",
   phone: "(720) 515-6099",
   instagramUrl: "https://www.instagram.com/ascent.ld/",

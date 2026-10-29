@@ -141,6 +141,31 @@ export type Slug = {
   source?: string;
 };
 
+export type ServicesPage = {
+  _id: string;
+  _type: "servicesPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  eyebrow?: string;
+  heroTitle?: string;
+  heroHighlight?: string;
+  heroImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  bookingSteps?: Array<{
+    title?: string;
+    description?: string;
+    _type: "bookingStep";
+    _key: string;
+  }>;
+};
+
 export type SponsorReference = {
   _ref: string;
   _type: "reference";
@@ -157,7 +182,6 @@ export type HomePage = {
   eyebrow?: string;
   heroTitle?: string;
   heroHighlight?: string;
-  heroDescription?: string;
   heroImage?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -194,7 +218,6 @@ export type HomePage = {
   };
   bookingHeading?: string;
   bookingDescription?: string;
-  bookingUrl?: string;
   email?: string;
   phone?: string;
   instagramUrl?: string;
@@ -306,6 +329,7 @@ export type AllSanitySchemaTypes =
   | PerformanceServiceReference
   | Page
   | Slug
+  | ServicesPage
   | SponsorReference
   | HomePage
   | SanityImagePaletteSwatch
@@ -318,13 +342,32 @@ export type AllSanitySchemaTypes =
   | Geopoint;
 
 // Source: ../web/src/sanity/queries.ts
+// Variable: SERVICES_PAGE_QUERY
+// Query: *[_type == "servicesPage" && _id == "servicesPage"][0] {    eyebrow, heroTitle, heroHighlight,    heroImage {asset, alt, hotspot, crop},    bookingSteps[]{_key, title, description}  }
+export type SERVICES_PAGE_QUERY_RESULT = {
+  eyebrow: string | null;
+  heroTitle: string | null;
+  heroHighlight: string | null;
+  heroImage: {
+    asset: SanityImageAssetReference | null;
+    alt: string | null;
+    hotspot: SanityImageHotspot | null;
+    crop: SanityImageCrop | null;
+  } | null;
+  bookingSteps: Array<{
+    _key: string;
+    title: string | null;
+    description: string | null;
+  }> | null;
+} | null;
+
+// Source: ../web/src/sanity/queries.ts
 // Variable: HOME_PAGE_QUERY
-// Query: *[_type == "homePage" && _id == "homePage"][0] {    eyebrow, heroTitle, heroHighlight, heroDescription,    heroImage {asset, alt, hotspot, crop},    storyHeading, storyText, storyUrl, servicesHeading, servicesDescription,    sponsors[]->{_id, name, website, logo {asset, alt, hotspot, crop}},    featuredServices[]->{      _id, title, tagline, summary, "slug": slug.current,      image {asset, alt, hotspot, crop}    },    communityHeading, communityText,    communityImage {asset, alt, hotspot, crop},    bookingHeading, bookingDescription, bookingUrl, email, phone, instagramUrl  }
+// Query: *[_type == "homePage" && _id == "homePage"][0] {    eyebrow, heroTitle, heroHighlight,    heroImage {asset, alt, hotspot, crop},    storyHeading, storyText, storyUrl, servicesHeading, servicesDescription,    sponsors[]->{_id, name, website, logo {asset, alt, hotspot, crop}},    featuredServices[]->{      _id, title, tagline, summary, "slug": slug.current,      image {asset, alt, hotspot, crop}    },    communityHeading, communityText,    communityImage {asset, alt, hotspot, crop},    bookingHeading, bookingDescription, email, phone, instagramUrl  }
 export type HOME_PAGE_QUERY_RESULT = {
   eyebrow: string | null;
   heroTitle: string | null;
   heroHighlight: string | null;
-  heroDescription: string | null;
   heroImage: {
     asset: SanityImageAssetReference | null;
     alt: string | null;
@@ -370,7 +413,6 @@ export type HOME_PAGE_QUERY_RESULT = {
   } | null;
   bookingHeading: string | null;
   bookingDescription: string | null;
-  bookingUrl: string | null;
   email: string | null;
   phone: string | null;
   instagramUrl: string | null;
@@ -454,13 +496,32 @@ export type SERVICE_QUERY_RESULT = {
   }> | null;
 } | null;
 
+// Source: ../web/src/sanity/queries.ts
+// Variable: SERVICES_QUERY
+// Query: *[_type == "performanceService" && defined(slug.current)] | order(title asc) {    _id, title, tagline, summary, "slug": slug.current,    image {asset, alt, hotspot, crop}  }
+export type SERVICES_QUERY_RESULT = Array<{
+  _id: string;
+  title: string | null;
+  tagline: string | null;
+  summary: string | null;
+  slug: string | null;
+  image: {
+    asset: SanityImageAssetReference | null;
+    alt: string | null;
+    hotspot: SanityImageHotspot | null;
+    crop: SanityImageCrop | null;
+  } | null;
+}>;
+
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '\n  *[_type == "homePage" && _id == "homePage"][0] {\n    eyebrow, heroTitle, heroHighlight, heroDescription,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, storyUrl, servicesHeading, servicesDescription,\n    sponsors[]->{_id, name, website, logo {asset, alt, hotspot, crop}},\n    featuredServices[]->{\n      _id, title, tagline, summary, "slug": slug.current,\n      image {asset, alt, hotspot, crop}\n    },\n    communityHeading, communityText,\n    communityImage {asset, alt, hotspot, crop},\n    bookingHeading, bookingDescription, bookingUrl, email, phone, instagramUrl\n  }\n': HOME_PAGE_QUERY_RESULT;
+    '\n  *[_type == "servicesPage" && _id == "servicesPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    bookingSteps[]{_key, title, description}\n  }\n': SERVICES_PAGE_QUERY_RESULT;
+    '\n  *[_type == "homePage" && _id == "homePage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, storyUrl, servicesHeading, servicesDescription,\n    sponsors[]->{_id, name, website, logo {asset, alt, hotspot, crop}},\n    featuredServices[]->{\n      _id, title, tagline, summary, "slug": slug.current,\n      image {asset, alt, hotspot, crop}\n    },\n    communityHeading, communityText,\n    communityImage {asset, alt, hotspot, crop},\n    bookingHeading, bookingDescription, email, phone, instagramUrl\n  }\n': HOME_PAGE_QUERY_RESULT;
     '{\n  "pages": *[_type == "page" && defined(slug.current)] | order(title asc) {\n    _id, title, summary, "slug": slug.current\n  },\n  "services": *[_type == "performanceService" && defined(slug.current)] | order(title asc) {\n    _id, title, summary, "slug": slug.current\n  }\n}': CONTENT_INDEX_QUERY_RESULT;
     '\n  *[_type == "page" && slug.current == $slug][0] {\n    _id, title, summary, body,\n    services[]->{_id, title, summary, "slug": slug.current}\n  }\n': PAGE_QUERY_RESULT;
     '\n  *[_type == "performanceService" && slug.current == $slug][0] {\n    _id, title, summary, body\n  }\n': SERVICE_QUERY_RESULT;
+    '\n  *[_type == "performanceService" && defined(slug.current)] | order(title asc) {\n    _id, title, tagline, summary, "slug": slug.current,\n    image {asset, alt, hotspot, crop}\n  }\n': SERVICES_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too

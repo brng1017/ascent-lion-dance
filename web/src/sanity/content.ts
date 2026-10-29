@@ -5,7 +5,29 @@ import {
   HOME_PAGE_QUERY,
   PAGE_QUERY,
   SERVICE_QUERY,
+  SERVICES_QUERY,
+  SERVICES_PAGE_QUERY,
 } from "./queries";
+
+export async function getServicesPage() {
+  "use cache";
+  const { data } = await sanityFetch({
+    query: SERVICES_PAGE_QUERY,
+    perspective: "published",
+    stega: false,
+  });
+  return data;
+}
+
+export async function getServices() {
+  "use cache";
+  const { data } = await sanityFetch({
+    query: SERVICES_QUERY,
+    perspective: "published",
+    stega: false,
+  });
+  return data;
+}
 
 export async function getHomePage() {
   "use cache";

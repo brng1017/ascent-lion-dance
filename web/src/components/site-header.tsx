@@ -1,6 +1,9 @@
 'use client';
 
 import Image from 'next/image';
+import { siteConfig } from '@/config/site';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useRef, useState, useSyncExternalStore } from 'react';
 
 function subscribeToScroll(listener: () => void) {
@@ -13,15 +16,15 @@ function hasScrolled() {
 }
 
 const links = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Join us', href: '#community' },
+  { label: 'Home', href: '/#home' },
+  { label: 'About', href: '/#about' },
+  { label: 'Services', href: '/services' },
+  { label: 'Join us', href: '/#community' },
 ];
 
 export function Brand() {
   return (
-    <a
+    <Link
       href='/#home'
       aria-label='Ascent Dragon and Lion Dance home'
       className='inline-flex shrink-0 items-center gap-3'
@@ -41,11 +44,15 @@ export function Brand() {
           DRAGON &amp; LION DANCE
         </span>
       </span>
-    </a>
+    </Link>
   );
 }
 
-export function SiteHeader({ bookingUrl }: { bookingUrl: string }) {
+export function SiteHeader() {
+  const pathname = usePathname();
+  const isActive = (href: string) => href === '/services'
+    ? pathname === '/services' || pathname.startsWith('/services/')
+    : href === '/#home' && pathname === '/';
   const [open, setOpen] = useState(false);
   const toggle = useRef<HTMLButtonElement>(null);
   const scrolled = useSyncExternalStore(
@@ -70,21 +77,22 @@ export function SiteHeader({ bookingUrl }: { bookingUrl: string }) {
           aria-label='Main navigation'
           className='hidden items-center gap-9 md:flex'
         >
-          {links.map((link, i) => (
-            <a
+          {links.map((link) => (
+            <Link
               key={link.href}
               href={link.href}
-              className={`border-b pb-2 text-[10px] font-medium tracking-[.16em] uppercase transition-colors hover:text-gold ${i === 0 ? 'border-crimson text-white' : 'border-transparent text-white/80'}`}
+              aria-current={isActive(link.href) ? 'page' : undefined}
+              className={`border-b pb-2 text-[10px] font-medium tracking-[.16em] uppercase transition-colors hover:text-gold ${isActive(link.href) ? 'border-crimson text-white' : 'border-transparent text-white/80'}`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
         <a
-          href={bookingUrl}
+          href={siteConfig.bookingUrl}
           className='hidden rounded-full bg-crimson px-6 py-3.5 text-xs font-bold text-white transition-colors hover:bg-crimson-light md:inline-flex'
         >
-          Book a show{' '}
+          {siteConfig.bookingLabel}{' '}
           <span aria-hidden='true' className='ml-5'>
             ↗
           </span>
@@ -121,20 +129,21 @@ export function SiteHeader({ bookingUrl }: { bookingUrl: string }) {
             className='absolute top-full right-4 left-4 max-h-[calc(100dvh-6rem)] overflow-y-auto rounded-b-2xl border border-white/15 bg-ink p-6 shadow-2xl md:hidden'
           >
             {links.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
+                aria-current={isActive(link.href) ? 'page' : undefined}
                 className='block border-b border-white/10 py-4 font-display text-2xl font-normal tracking-wide uppercase'
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <a
-              href={bookingUrl}
+              href={siteConfig.bookingUrl}
               className='mt-5 flex items-center justify-between rounded-full bg-crimson px-5 py-4 font-bold'
             >
-              Book a show <span aria-hidden='true'>↗</span>
+              {siteConfig.bookingLabel} <span aria-hidden='true'>↗</span>
             </a>
           </nav>
         )}

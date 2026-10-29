@@ -47,7 +47,6 @@ export const homePage = defineType({
       group: 'hero',
       validation: (rule) => rule.required(),
     }),
-    defineField({name: 'heroDescription', type: 'text', rows: 3, group: 'hero'}),
     photo('heroImage', 'Hero photograph', 'hero'),
     defineField({
       name: 'occasions',
@@ -88,13 +87,6 @@ export const homePage = defineType({
     photo('communityImage', 'Community photograph', 'community'),
     defineField({name: 'bookingHeading', type: 'string', group: 'booking'}),
     defineField({name: 'bookingDescription', type: 'text', rows: 3, group: 'booking'}),
-    defineField({
-      name: 'bookingUrl',
-      title: 'Booking form URL',
-      type: 'url',
-      group: 'booking',
-      validation: (rule) => rule.required(),
-    }),
     defineField({
       name: 'email',
       type: 'string',

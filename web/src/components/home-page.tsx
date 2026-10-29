@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { siteConfig } from '@/config/site';
+import Link from 'next/link';
 import type { HOME_PAGE_QUERY_RESULT } from '../../sanity.types';
 import {
   homeDefaults,
@@ -38,9 +40,6 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
     eyebrow: content?.eyebrow ?? homeDefaults.eyebrow,
     heroTitle: content?.heroTitle ?? homeDefaults.heroTitle,
     heroHighlight: content?.heroHighlight ?? homeDefaults.heroHighlight,
-    heroDescription: content
-      ? content.heroDescription
-      : homeDefaults.heroDescription,
     storyHeading: content?.storyHeading ?? homeDefaults.storyHeading,
     storyText: content?.storyText ?? homeDefaults.storyText,
     storyUrl: content?.storyUrl ?? homeDefaults.storyUrl,
@@ -53,7 +52,7 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
     bookingHeading: content?.bookingHeading ?? homeDefaults.bookingHeading,
     bookingDescription:
       content?.bookingDescription ?? homeDefaults.bookingDescription,
-    bookingUrl: content?.bookingUrl ?? homeDefaults.bookingUrl,
+    bookingUrl: siteConfig.bookingUrl,
     email: content?.email ?? homeDefaults.email,
     phone: content?.phone ?? homeDefaults.phone,
     instagramUrl: content?.instagramUrl ?? homeDefaults.instagramUrl,
@@ -111,7 +110,7 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
       >
         Skip to content
       </a>
-      <SiteHeader bookingUrl={home.bookingUrl} />
+      <SiteHeader />
       <main id='main-content'>
         <div id='home' className='relative isolate overflow-clip bg-ink pt-24'>
           {heroImage && (
@@ -143,17 +142,12 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
               <br />
               <span className='text-gold'>{home.heroHighlight}</span>
             </h1>
-            {home.heroDescription && (
-              <p className='mt-8 max-w-92.5 font-body text-[13px] leading-[1.9] text-white/80 sm:text-sm'>
-                {home.heroDescription}
-              </p>
-            )}
             <div className='mt-9 flex flex-wrap items-center gap-3 sm:gap-4'>
               <a
                 href={home.bookingUrl}
                 className='inline-flex min-h-12 items-center gap-5 rounded-full bg-crimson px-6 py-4 text-xs font-bold transition-colors hover:bg-crimson-light sm:gap-8 sm:px-7'
               >
-                Book a show <Arrow diagonal />
+                {siteConfig.bookingLabel} <Arrow diagonal />
               </a>
             </div>
           </section>
@@ -250,12 +244,12 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
                 <p className='font-body text-xs leading-7 text-white/60'>
                   {home.servicesDescription}
                 </p>
-                <a
-                  href={home.bookingUrl}
+                <Link
+                  href='/services'
                   className='mt-4 inline-flex items-center gap-4 text-xs font-semibold text-gold'
                 >
-                  Let's plan your performance <Arrow diagonal />
-                </a>
+                  Explore all services <Arrow diagonal />
+                </Link>
               </div>
             </div>
             <ServicesCarousel services={services} />
@@ -316,7 +310,7 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
             <div className='relative flex flex-col justify-between gap-9 md:flex-row md:items-end'>
               <div>
                 <p className='mb-5 text-[10px] font-semibold tracking-[.24em] uppercase'>
-                  Let's celebrate
+                  Let&apos;s celebrate
                 </p>
                 <h2
                   id='booking-heading'
