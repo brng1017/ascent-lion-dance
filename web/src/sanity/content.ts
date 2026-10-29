@@ -1,6 +1,7 @@
 import "server-only";
 import { sanityFetch } from "./live";
 import {
+  ABOUT_PAGE_QUERY,
   CONTENT_INDEX_QUERY,
   HOME_PAGE_QUERY,
   PAGE_QUERY,
@@ -8,6 +9,16 @@ import {
   SERVICES_QUERY,
   SERVICES_PAGE_QUERY,
 } from "./queries";
+
+export async function getAboutPage() {
+  "use cache";
+  const { data } = await sanityFetch({
+    query: ABOUT_PAGE_QUERY,
+    perspective: "published",
+    stega: false,
+  });
+  return data;
+}
 
 export async function getServicesPage() {
   "use cache";

@@ -17,10 +17,11 @@ export default defineConfig({
           .title('Website content')
           .items([
             S.listItem().singleton('homePage'),
+            S.listItem().singleton('aboutPage'),
             S.listItem().singleton('servicesPage'),
             S.divider(),
             ...S.documentTypeListItems().filter(
-              (item) => !['homePage', 'servicesPage'].includes(item.getId() ?? ''),
+              (item) => !['homePage', 'aboutPage', 'servicesPage'].includes(item.getId() ?? ''),
             ),
           ]),
     }),
@@ -30,6 +31,7 @@ export default defineConfig({
   document: {
     singletons: [
       defineSingleton({documentId: 'homePage', schemaType: 'homePage'}),
+      defineSingleton({documentId: 'aboutPage', schemaType: 'aboutPage'}),
       defineSingleton({documentId: 'servicesPage', schemaType: 'servicesPage'}),
     ],
   },

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { SiteHeader } from '@/components/site-header';
+import { PageHero } from '@/components/page-hero';
 import { siteConfig } from '@/config/site';
 import { getHomePage, getServices, getServicesPage } from '@/sanity/content';
 import { serviceDefaults } from '@/sanity/home-defaults';
@@ -79,47 +80,14 @@ export default async function ServicesPage() {
       </a>
       <SiteHeader />
       <main id='main-content'>
-        <div id='home' className='relative isolate overflow-clip bg-ink pt-24'>
-          {heroImage && (
-            <div className='absolute inset-0 -z-10'>
-              <Image
-                src={heroImage}
-                alt={heroPhoto?.alt ?? ''}
-                fill
-                loading='eager'
-                fetchPriority='high'
-                sizes='100vw'
-                className='object-cover object-[64%_center] lg:object-[center_47%]'
-              />
-              <div className='absolute inset-0 bg-black/60' />
-            </div>
-          )}
-          <section
-            aria-labelledby='services-heading'
-            className='relative mx-auto flex min-h-162.5 max-w-332 flex-col justify-center px-6 pt-14 pb-24 md:min-h-175 lg:px-10 lg:pt-16 lg:pb-28'
-          >
-            {page.eyebrow && (
-              <p className='mb-7 flex items-center gap-3 text-[10px] font-semibold tracking-[.2em] text-gold uppercase sm:text-xs'>
-                <span className='h-px w-8 bg-gold' aria-hidden='true' />
-                {page.eyebrow}
-              </p>
-            )}
-            <h1
-              id='services-heading'
-              className='font-display text-[clamp(4.75rem,18vw,11.5rem)] leading-[.95] font-normal tracking-tight uppercase'
-            >
-              {page.heroTitle}
-              <br />
-              <span className='text-gold'>{page.heroHighlight}</span>
-            </h1>
-            <a
-              href={bookingUrl}
-              className='mt-9 inline-flex min-h-12 w-fit items-center gap-8 rounded-full bg-crimson px-7 py-4 text-xs font-bold transition-colors hover:bg-crimson-light'
-            >
-              {siteConfig.bookingLabel} <Arrow />
-            </a>
-          </section>
-        </div>
+        <PageHero
+          headingId='services-heading'
+          title={page.heroTitle}
+          highlight={page.heroHighlight}
+          eyebrow={page.eyebrow}
+          image={heroImage}
+          imageAlt={heroPhoto?.alt ?? ''}
+        />
 
         <section
           aria-label='Our performance services'

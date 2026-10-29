@@ -1,5 +1,17 @@
 import { defineQuery } from "next-sanity";
 
+export const ABOUT_PAGE_QUERY = defineQuery(`
+  *[_type == "aboutPage" && _id == "aboutPage"][0] {
+    eyebrow, heroTitle, heroHighlight,
+    heroImage {asset, alt, hotspot, crop},
+    storyHeading, storyText, valuesIntroduction, valuesHeading,
+    values[]{_key, title, text},
+    communityHeading, communityText,
+    communityImage {asset, alt, hotspot, crop},
+    bookingHeading, bookingDescription, email
+  }
+`);
+
 export const SERVICES_PAGE_QUERY = defineQuery(`
   *[_type == "servicesPage" && _id == "servicesPage"][0] {
     eyebrow, heroTitle, heroHighlight,

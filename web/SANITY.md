@@ -94,6 +94,21 @@ The one-time `scripts/simplify-page-content.ts` cleanup removes the old settings
 from saved page documents and adds the third booking step to a draft without
 publishing editorial changes.
 
+The **About Page** singleton manages `/about` independently: hero introduction,
+headline and photograph; story heading and text; values introduction, heading,
+and ordered cards; community heading, text and photograph; team contact email;
+and call-to-action heading and description. Hero field names and image controls
+match Home Page and Services Page. Search metadata, navigation destinations, and
+button labels stay in code.
+
+Review and publish About Page in Studio to display its content and images. Before
+publication, the route uses its own starter copy and no photographs. Its seed
+script copies the existing hero and community image references once, preserving
+their crops and alt text; subsequent homepage edits do not affect About Page.
+Run `npx sanity exec scripts/create-about-page.ts --with-user-token` from `studio`
+to seed a missing draft; existing content is preserved. The shared footer still
+uses global contact content from Home Page.
+
 Three sample documents were created as drafts for review in Studio. Edit their
 placeholder copy and publish when ready. Unpublished drafts do not appear on the
 website; draft previews and Visual Editing are not configured.

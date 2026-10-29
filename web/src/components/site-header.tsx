@@ -17,7 +17,7 @@ function hasScrolled() {
 
 const links = [
   { label: 'Home', href: '/#home' },
-  { label: 'About', href: '/#about' },
+  { label: 'About', href: '/about' },
   { label: 'Services', href: '/services' },
   { label: 'Join us', href: '/#community' },
 ];
@@ -50,9 +50,9 @@ export function Brand() {
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const isActive = (href: string) => href === '/services'
-    ? pathname === '/services' || pathname.startsWith('/services/')
-    : href === '/#home' && pathname === '/';
+  const isActive = (href: string) => href === '/#home'
+    ? pathname === '/'
+    : !href.includes('#') && (pathname === href || pathname.startsWith(`${href}/`));
   const [open, setOpen] = useState(false);
   const toggle = useRef<HTMLButtonElement>(null);
   const scrolled = useSyncExternalStore(

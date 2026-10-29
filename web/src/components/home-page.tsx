@@ -9,6 +9,7 @@ import {
 } from '@/sanity/home-defaults';
 import { imageUrl } from '@/sanity/image';
 import { SiteHeader } from './site-header';
+import { PageHero } from './page-hero';
 import { ServicesCarousel } from './services-carousel';
 import { SponsorsBanner, type Sponsor } from './sponsors-banner';
 
@@ -42,7 +43,6 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
     heroHighlight: content?.heroHighlight ?? homeDefaults.heroHighlight,
     storyHeading: content?.storyHeading ?? homeDefaults.storyHeading,
     storyText: content?.storyText ?? homeDefaults.storyText,
-    storyUrl: content?.storyUrl ?? homeDefaults.storyUrl,
     servicesHeading: content?.servicesHeading ?? homeDefaults.servicesHeading,
     servicesDescription:
       content?.servicesDescription ?? homeDefaults.servicesDescription,
@@ -112,46 +112,16 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
       </a>
       <SiteHeader />
       <main id='main-content'>
-        <div id='home' className='relative isolate overflow-clip bg-ink pt-24'>
-          {heroImage && (
-            <div className='absolute inset-0 -z-10'>
-              <Image
-                src={heroImage}
-                alt={content?.heroImage?.alt ?? ''}
-                fill
-                loading='eager'
-                fetchPriority='high'
-                sizes='100vw'
-                className='object-cover object-[64%_center] lg:object-[center_47%]'
-              />
-              <div className='absolute inset-0 bg-black/60' />
-            </div>
-          )}
-          <section
-            aria-labelledby='hero-heading'
-            className='relative mx-auto flex min-h-162.5 max-w-332 flex-col justify-center px-6 pt-14 pb-24 md:min-h-175 lg:px-10 lg:pt-16 lg:pb-28'
-          >
-            <p className='mb-7 flex items-center gap-3 text-[10px] font-semibold tracking-[.2em] text-gold uppercase sm:text-xs'>
-              {home.eyebrow}
-            </p>
-            <h1
-              id='hero-heading'
-              className='max-w-3xl font-display text-[clamp(4.75rem,23vw,11.5rem)] leading-[.95] font-normal tracking-tight uppercase sm:text-[clamp(6rem,13vw,11.5rem)]'
-            >
-              {home.heroTitle}
-              <br />
-              <span className='text-gold'>{home.heroHighlight}</span>
-            </h1>
-            <div className='mt-9 flex flex-wrap items-center gap-3 sm:gap-4'>
-              <a
-                href={home.bookingUrl}
-                className='inline-flex min-h-12 items-center gap-5 rounded-full bg-crimson px-6 py-4 text-xs font-bold transition-colors hover:bg-crimson-light sm:gap-8 sm:px-7'
-              >
-                {siteConfig.bookingLabel} <Arrow diagonal />
-              </a>
-            </div>
-          </section>
-        </div>
+        <PageHero
+          id='home'
+          variant='home'
+          headingId='hero-heading'
+          title={home.heroTitle}
+          highlight={home.heroHighlight}
+          eyebrow={home.eyebrow}
+          image={heroImage}
+          imageAlt={content?.heroImage?.alt ?? ''}
+        />
 
         <div
           className='overflow-hidden bg-crimson py-4'
@@ -199,12 +169,12 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
                   </p>
                 ))}
               </div>
-              <a
-                href={home.storyUrl}
+              <Link
+                href='/about'
                 className='mt-7 inline-flex items-center gap-8 border-b border-crimson/30 pb-2 text-xs font-bold text-crimson transition-colors hover:border-crimson'
               >
                 Get to know Ascent <Arrow />
-              </a>
+              </Link>
             </div>
           </div>
         </section>

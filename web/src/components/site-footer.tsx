@@ -25,7 +25,7 @@ export async function SiteFooter() {
           aria-label="Footer navigation"
           className="grid grid-cols-2 gap-x-12 gap-y-4 text-xs text-white/70 sm:gap-x-20"
         >
-          <Link href="/#about" className="hover:text-gold">
+          <Link href="/about" className="hover:text-gold">
             Our story
           </Link>
           <Link href="/services" className="hover:text-gold">

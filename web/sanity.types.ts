@@ -166,6 +166,48 @@ export type ServicesPage = {
   }>;
 };
 
+export type AboutPage = {
+  _id: string;
+  _type: "aboutPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  eyebrow?: string;
+  heroTitle?: string;
+  heroHighlight?: string;
+  heroImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  storyHeading?: string;
+  storyText?: string;
+  valuesIntroduction?: string;
+  valuesHeading?: string;
+  values?: Array<{
+    title?: string;
+    text?: string;
+    _type: "aboutValue";
+    _key: string;
+  }>;
+  communityHeading?: string;
+  communityText?: string;
+  communityImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  bookingHeading?: string;
+  bookingDescription?: string;
+  email?: string;
+};
+
 export type SponsorReference = {
   _ref: string;
   _type: "reference";
@@ -330,6 +372,7 @@ export type AllSanitySchemaTypes =
   | Page
   | Slug
   | ServicesPage
+  | AboutPage
   | SponsorReference
   | HomePage
   | SanityImagePaletteSwatch
@@ -340,6 +383,41 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint;
+
+// Source: ../web/src/sanity/queries.ts
+// Variable: ABOUT_PAGE_QUERY
+// Query: *[_type == "aboutPage" && _id == "aboutPage"][0] {    eyebrow, heroTitle, heroHighlight,    heroImage {asset, alt, hotspot, crop},    storyHeading, storyText, valuesIntroduction, valuesHeading,    values[]{_key, title, text},    communityHeading, communityText,    communityImage {asset, alt, hotspot, crop},    bookingHeading, bookingDescription, email  }
+export type ABOUT_PAGE_QUERY_RESULT = {
+  eyebrow: string | null;
+  heroTitle: string | null;
+  heroHighlight: string | null;
+  heroImage: {
+    asset: SanityImageAssetReference | null;
+    alt: string | null;
+    hotspot: SanityImageHotspot | null;
+    crop: SanityImageCrop | null;
+  } | null;
+  storyHeading: string | null;
+  storyText: string | null;
+  valuesIntroduction: string | null;
+  valuesHeading: string | null;
+  values: Array<{
+    _key: string;
+    title: string | null;
+    text: string | null;
+  }> | null;
+  communityHeading: string | null;
+  communityText: string | null;
+  communityImage: {
+    asset: SanityImageAssetReference | null;
+    alt: string | null;
+    hotspot: SanityImageHotspot | null;
+    crop: SanityImageCrop | null;
+  } | null;
+  bookingHeading: string | null;
+  bookingDescription: string | null;
+  email: string | null;
+} | null;
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: SERVICES_PAGE_QUERY
@@ -516,6 +594,7 @@ export type SERVICES_QUERY_RESULT = Array<{
 // Query TypeMap
 declare global {
   interface SanityQueries {
+    '\n  *[_type == "aboutPage" && _id == "aboutPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, valuesIntroduction, valuesHeading,\n    values[]{_key, title, text},\n    communityHeading, communityText,\n    communityImage {asset, alt, hotspot, crop},\n    bookingHeading, bookingDescription, email\n  }\n': ABOUT_PAGE_QUERY_RESULT;
     '\n  *[_type == "servicesPage" && _id == "servicesPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    bookingSteps[]{_key, title, description}\n  }\n': SERVICES_PAGE_QUERY_RESULT;
     '\n  *[_type == "homePage" && _id == "homePage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, storyUrl, servicesHeading, servicesDescription,\n    sponsors[]->{_id, name, website, logo {asset, alt, hotspot, crop}},\n    featuredServices[]->{\n      _id, title, tagline, summary, "slug": slug.current,\n      image {asset, alt, hotspot, crop}\n    },\n    communityHeading, communityText,\n    communityImage {asset, alt, hotspot, crop},\n    bookingHeading, bookingDescription, email, phone, instagramUrl\n  }\n': HOME_PAGE_QUERY_RESULT;
     '{\n  "pages": *[_type == "page" && defined(slug.current)] | order(title asc) {\n    _id, title, summary, "slug": slug.current\n  },\n  "services": *[_type == "performanceService" && defined(slug.current)] | order(title asc) {\n    _id, title, summary, "slug": slug.current\n  }\n}': CONTENT_INDEX_QUERY_RESULT;
