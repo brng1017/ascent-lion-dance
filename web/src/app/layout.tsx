@@ -4,6 +4,9 @@ import './globals.css';
 import { Suspense } from 'react';
 import { SanityLive } from '@/sanity/live';
 import { SiteFooter } from '@/components/site-footer';
+import { OrganizationSchema } from '@/components/organization-schema';
+import { siteConfig } from '@/config/site';
+import { isSearchIndexable, pageMetadata } from '@/lib/seo';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -29,9 +32,22 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: 'Ascent Dragon & Lion Dance | Rise Above',
-  description:
-    'Rooted in tradition. Made for your moment. Discover Ascent Lion Dance in Denver and book a performance for your next celebration.',
+  metadataBase: new URL(siteConfig.url),
+  ...pageMetadata({
+    title: 'Lion & Dragon Dance in Denver, CO',
+    description:
+      'Book Ascent Dragon & Lion Dance for weddings, grand openings, Lunar New Year, and special events in Denver and surrounding Colorado communities.',
+    path: '/',
+  }),
+  robots: {
+    index: isSearchIndexable,
+    follow: true,
+    googleBot: {
+      index: isSearchIndexable,
+      follow: true,
+      'max-image-preview': 'large',
+    },
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
@@ -44,6 +60,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       <body className='min-h-full flex flex-col' suppressHydrationWarning>
         {children}
         <SiteFooter />
+        <OrganizationSchema />
         <Suspense fallback={null}>
           <SanityLive includeDrafts={false} />
         </Suspense>

@@ -1,4 +1,5 @@
 import 'server-only';
+import { cacheLife } from 'next/cache';
 import { sanityFetch } from './live';
 import {
   JOIN_PAGE_QUERY,
@@ -7,7 +8,20 @@ import {
   PAGE_QUERY,
   SERVICES_QUERY,
   SERVICES_PAGE_QUERY,
+  SITEMAP_PAGES_QUERY,
 } from './queries';
+
+export async function getSitemapPages() {
+  'use cache';
+  const { data } = await sanityFetch({
+    query: SITEMAP_PAGES_QUERY,
+    perspective: 'published',
+    stega: false,
+  });
+  // Crawlers do not mount SanityLive, so the sitemap also needs timed refreshes.
+  cacheLife('hours');
+  return data;
+}
 
 export async function getJoinPage() {
   'use cache';

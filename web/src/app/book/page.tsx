@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { BookingForm } from '@/components/booking-form';
@@ -8,11 +9,12 @@ import { sortServicesByFeatured } from '@/sanity/service-order';
 import { homeDefaults } from '@/sanity/home-defaults';
 import { performanceServiceDefaults } from '@/sanity/performance-service-defaults';
 
-export const metadata: Metadata = {
-  title: 'Request a Booking | Ascent Dragon & Lion Dance',
+export const metadata: Metadata = pageMetadata({
+  title: 'Book Lion & Dragon Dance in Denver',
   description:
-    'Tell us about your celebration and request a lion dance performance from Ascent Dragon & Lion Dance in Denver.',
-};
+    'Request a lion or dragon dance performance in Denver and surrounding areas. Tell Ascent about your event, date, and location to discuss availability and details.',
+  path: '/book',
+});
 
 type BookingSearchParams = Promise<{
   [key: string]: string | string[] | undefined;

@@ -1,5 +1,11 @@
 import { defineQuery } from 'next-sanity';
 
+export const SITEMAP_PAGES_QUERY = defineQuery(`
+  *[_type == "page" && defined(slug.current)] | order(slug.current asc) {
+    "slug": slug.current, _updatedAt
+  }
+`);
+
 export const JOIN_PAGE_QUERY = defineQuery(`
   *[_type == "joinPage" && _id == "joinPage"][0] {
     eyebrow, heroTitle, heroHighlight,

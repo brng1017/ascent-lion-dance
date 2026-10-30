@@ -1,3 +1,5 @@
+import { absoluteUrl, pageMetadata } from '@/lib/seo';
+import { JsonLd } from '@/components/json-ld';
 import { Arrow } from '@/components/arrow';
 import type { Metadata } from 'next';
 import Image from 'next/image';
@@ -10,11 +12,12 @@ import { servicesDefaults } from '@/sanity/services-defaults';
 import { imageUrl } from '@/sanity/image';
 import { sortServicesByFeatured } from '@/sanity/service-order';
 
-export const metadata: Metadata = {
-  title: 'Our Services | Ascent Dragon & Lion Dance',
+export const metadata: Metadata = pageMetadata({
+  title: 'Lion & Dragon Dance Services in Denver',
   description:
-    'Celebrate Lunar New Year, grand openings, weddings, banquets, birthdays, and company events with Ascent Lion Dance in Denver.',
-};
+    'Explore lion and dragon dance performances in Denver for weddings, grand openings, Lunar New Year, birthdays, banquets, company events, and school celebrations.',
+  path: '/services',
+});
 
 export default async function ServicesPage() {
   const [home, publishedServices, content] = await Promise.all([
@@ -59,6 +62,41 @@ export default async function ServicesPage() {
 
   return (
     <>
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          '@id': absoluteUrl('/services#webpage'),
+          url: absoluteUrl('/services'),
+          name: 'Lion and Dragon Dance Services in Denver',
+          isPartOf: { '@id': absoluteUrl('/#website') },
+          mainEntity: {
+            '@type': 'ItemList',
+            itemListElement: services.map((service, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              item: {
+                '@type': 'Service',
+                '@id': absoluteUrl(`/services#service-${service.anchor}`),
+                url: absoluteUrl(`/services#service-${service.anchor}`),
+                name: service.title,
+                description: service.summary || undefined,
+                image: service.image || undefined,
+                serviceType: 'Lion and dragon dance performance',
+                provider: { '@id': absoluteUrl('/#organization') },
+                areaServed: {
+                  '@type': 'Place',
+                  name: 'Greater Denver area, Colorado',
+                },
+                availableChannel: {
+                  '@type': 'ServiceChannel',
+                  serviceUrl: absoluteUrl(bookingUrl),
+                },
+              },
+            })),
+          },
+        }}
+      />
       <a
         href='#main-content'
         className='sr-only z-50 rounded-lg bg-gold px-5 py-3 font-bold text-ink focus:not-sr-only focus:fixed focus:top-3 focus:left-3'

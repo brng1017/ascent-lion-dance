@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 import { Arrow } from '@/components/arrow';
 import Image from 'next/image';
@@ -8,11 +9,12 @@ import { getAboutPage } from '@/sanity/content';
 import { aboutDefaults } from '@/sanity/about-defaults';
 import { imageUrl } from '@/sanity/image';
 
-export const metadata: Metadata = {
-  title: 'About Us | Ascent Dragon & Lion Dance',
+export const metadata: Metadata = pageMetadata({
+  title: 'About Our Denver Lion & Dragon Dance Team',
   description:
-    'Meet Ascent Dragon & Lion Dance, a Denver community celebrating tradition, connection, and the spirit of lion dance.',
-};
+    'Meet Ascent Dragon & Lion Dance, a Denver nonprofit team sharing lion and dragon dance, cultural heritage, and community through performances across Greater Denver.',
+  path: '/about',
+});
 
 export default async function AboutPage() {
   const content = await getAboutPage();

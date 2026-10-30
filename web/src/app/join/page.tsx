@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 import { Arrow } from '@/components/arrow';
 import { PageHero } from '@/components/page-hero';
@@ -6,11 +7,12 @@ import { getJoinPage } from '@/sanity/content';
 import { joinDefaults } from '@/sanity/join-defaults';
 import { imageUrl } from '@/sanity/image';
 
-export const metadata: Metadata = {
-  title: 'Join Us | Ascent Dragon & Lion Dance',
+export const metadata: Metadata = pageMetadata({
+  title: 'Join Our Lion & Dragon Dance Team in Denver',
   description:
-    'Interested in joining Ascent Dragon & Lion Dance in Denver? Meet your community and get in touch to learn how to get involved.',
-};
+    'Become part of the Ascent family in Denver. Learn about joining our lion and dragon dance team, sharing our cultural heritage, and performing with our community.',
+  path: '/join',
+});
 
 export default async function JoinPage() {
   const content = await getJoinPage();

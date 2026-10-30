@@ -417,6 +417,14 @@ export type AllSanitySchemaTypes =
   | Geopoint;
 
 // Source: ../web/src/sanity/queries.ts
+// Variable: SITEMAP_PAGES_QUERY
+// Query: *[_type == "page" && defined(slug.current)] | order(slug.current asc) {    "slug": slug.current, _updatedAt  }
+export type SITEMAP_PAGES_QUERY_RESULT = Array<{
+  slug: string | null;
+  _updatedAt: string;
+}>;
+
+// Source: ../web/src/sanity/queries.ts
 // Variable: JOIN_PAGE_QUERY
 // Query: *[_type == "joinPage" && _id == "joinPage"][0] {    eyebrow, heroTitle, heroHighlight,    heroImage {asset, alt, hotspot, crop},    storyHeading, storyText, contactHeading, contactText, email  }
 export type JOIN_PAGE_QUERY_RESULT = {
@@ -631,6 +639,7 @@ export type SERVICES_QUERY_RESULT = Array<{
 // Query TypeMap
 declare global {
   interface SanityQueries {
+    '\n  *[_type == "page" && defined(slug.current)] | order(slug.current asc) {\n    "slug": slug.current, _updatedAt\n  }\n': SITEMAP_PAGES_QUERY_RESULT;
     '\n  *[_type == "joinPage" && _id == "joinPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, contactHeading, contactText, email\n  }\n': JOIN_PAGE_QUERY_RESULT;
     '\n  *[_type == "aboutPage" && _id == "aboutPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, valuesIntroduction, valuesHeading,\n    lionDanceHeading, lionDanceText,\n    lionDanceImage {asset, alt, hotspot, crop},\n    dragonDanceHeading, dragonDanceText,\n    dragonDanceImage {asset, alt, hotspot, crop},\n    values[]{_key, title, text},\n    journeyHeading, milestones[]{_key, year, text},\n    galleryHeading,\n    galleryImages[]{_key, asset, alt, hotspot, crop},\n  }\n': ABOUT_PAGE_QUERY_RESULT;
     '\n  *[_type == "servicesPage" && _id == "servicesPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    introHeading, introText,\n    bookingSteps[]{_key, title, description},\n    performanceOptions[]{_key, title, image {asset, hotspot, crop}}\n  }\n': SERVICES_PAGE_QUERY_RESULT;

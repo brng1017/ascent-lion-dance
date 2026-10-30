@@ -2,6 +2,24 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { PortableText } from 'next-sanity';
 import { getPage } from '@/sanity/content';
+import { pageMetadata } from '@/lib/seo';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const page = await getPage(slug);
+  if (!page) notFound();
+  return pageMetadata({
+    title: page.title ?? 'Ascent in Denver',
+    description:
+      page.summary ||
+      'Learn more about Ascent Dragon & Lion Dance in Denver, Colorado.',
+    path: `/pages/${encodeURIComponent(slug)}`,
+  });
+}
 
 export default async function WebsitePage({
   params,

@@ -37,3 +37,4 @@ generated file manually.
 
 See [SANITY.md](SANITY.md) for content management and deployment, and
 [BOOKING.md](BOOKING.md) for EmailJS configuration and booking form behavior.
+See [SEO.md](SEO.md) for search metadata and the post-deployment indexing checklist.
