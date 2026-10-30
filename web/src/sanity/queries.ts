@@ -1,4 +1,4 @@
-import { defineQuery } from "next-sanity";
+import { defineQuery } from 'next-sanity';
 
 export const JOIN_PAGE_QUERY = defineQuery(`
   *[_type == "joinPage" && _id == "joinPage"][0] {
@@ -51,15 +51,6 @@ export const HOME_PAGE_QUERY = defineQuery(`
     bookingHeading, bookingDescription, email, phone, instagramUrl
   }
 `);
-
-export const CONTENT_INDEX_QUERY = defineQuery(`{
-  "pages": *[_type == "page" && defined(slug.current)] | order(title asc) {
-    _id, title, summary, "slug": slug.current
-  },
-  "services": *[_type == "performanceService" && defined(slug.current)] | order(title asc) {
-    _id, title, summary, "slug": slug.current
-  }
-}`);
 
 export const PAGE_QUERY = defineQuery(`
   *[_type == "page" && slug.current == $slug][0] {

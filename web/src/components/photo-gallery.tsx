@@ -1,6 +1,6 @@
 'use client';
 
-import { Arrow } from '@/components/arrow';
+import { Arrow } from './arrow';
 
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';

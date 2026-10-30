@@ -8,5 +8,12 @@ export function Arrow({
   className?: string;
 }) {
   const Icon = diagonal ? FiArrowUpRight : FiArrowRight;
-  return <Icon aria-hidden='true' focusable='false' strokeWidth={1.5} className={`shrink-0 ${className}`} />;
+  return (
+    <Icon
+      aria-hidden='true'
+      focusable='false'
+      strokeWidth={1.5}
+      className={`shrink-0 ${className}`}
+    />
+  );
 }

@@ -1,5 +1,5 @@
-import { HomePage } from "@/components/home-page";
-import { getHomePage } from "@/sanity/content";
+import { HomePage } from '@/components/home-page';
+import { getHomePage } from '@/sanity/content';
 
 export default async function Home() {
   const content = await getHomePage();

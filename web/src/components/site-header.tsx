@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { SiteBrand } from './site-brand';
 import { Arrow } from './arrow';
 import { siteConfig } from '@/config/site';
 import Link from 'next/link';
@@ -23,37 +23,13 @@ const links = [
   { label: 'Join us', href: '/join' },
 ];
 
-export function Brand() {
-  return (
-    <Link
-      href='/#home'
-      aria-label='Ascent Dragon and Lion Dance home'
-      className='inline-flex shrink-0 items-center gap-3'
-    >
-      <Image
-        src='/images/ascent-logo.png'
-        width={60}
-        height={44}
-        alt=''
-        className='h-11 w-auto object-contain'
-      />
-      <span className='block text-white'>
-        <span className='block font-display text-[23px] leading-none font-normal tracking-[.06em]'>
-          ASCENT
-        </span>
-        <span className='mt-1.5 block text-[8px] leading-none font-medium tracking-[.21em]'>
-          DRAGON &amp; LION DANCE
-        </span>
-      </span>
-    </Link>
-  );
-}
-
 export function SiteHeader() {
   const pathname = usePathname();
-  const isActive = (href: string) => href === '/#home'
-    ? pathname === '/'
-    : !href.includes('#') && (pathname === href || pathname.startsWith(`${href}/`));
+  const isActive = (href: string) =>
+    href === '/#home'
+      ? pathname === '/'
+      : !href.includes('#') &&
+        (pathname === href || pathname.startsWith(`${href}/`));
   const [open, setOpen] = useState(false);
   const toggle = useRef<HTMLButtonElement>(null);
   const scrolled = useSyncExternalStore(
@@ -73,7 +49,7 @@ export function SiteHeader() {
       }}
     >
       <div className='relative mx-auto flex h-full max-w-332 items-center justify-between px-6 lg:px-10'>
-        <Brand />
+        <SiteBrand />
         <nav
           aria-label='Main navigation'
           className='hidden items-center gap-9 md:flex'
@@ -93,8 +69,7 @@ export function SiteHeader() {
           href={siteConfig.bookingUrl}
           className='hidden items-center rounded-full bg-crimson px-6 py-3.5 text-xs font-bold text-white transition-colors hover:bg-crimson-light md:inline-flex'
         >
-          {siteConfig.bookingLabel}{' '}
-          <Arrow diagonal className='ml-5 size-4' />
+          {siteConfig.bookingLabel} <Arrow diagonal className='ml-5 size-4' />
         </a>
         <button
           ref={toggle}

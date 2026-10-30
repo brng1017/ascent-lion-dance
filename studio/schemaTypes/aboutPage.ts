@@ -1,23 +1,7 @@
+import {heroFields} from './fields/hero'
+import {photoField} from './fields/photo'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {DocumentIcon} from '@sanity/icons/Document'
-
-function photo(name: string, title: string, group: string) {
-  return defineField({
-    name,
-    title,
-    group,
-    type: 'image',
-    options: {hotspot: true},
-    fields: [
-      defineField({
-        name: 'alt',
-        title: 'Alternative text',
-        type: 'string',
-        validation: (rule) => rule.required(),
-      }),
-    ],
-  })
-}
 
 export const aboutPage = defineType({
   name: 'aboutPage',
@@ -34,22 +18,7 @@ export const aboutPage = defineType({
     {name: 'gallery', title: 'Photo gallery'},
   ],
   fields: [
-    defineField({name: 'eyebrow', title: 'Introduction', type: 'string', group: 'hero'}),
-    defineField({
-      name: 'heroTitle',
-      title: 'Headline, first line',
-      type: 'string',
-      group: 'hero',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'heroHighlight',
-      title: 'Headline, second line',
-      type: 'string',
-      group: 'hero',
-      validation: (rule) => rule.required(),
-    }),
-    photo('heroImage', 'Hero photograph', 'hero'),
+    ...heroFields(),
     defineField({name: 'storyHeading', type: 'string', group: 'story'}),
     defineField({name: 'storyText', type: 'text', rows: 7, group: 'story'}),
     defineField({name: 'lionDanceHeading', title: 'Heading', type: 'string', group: 'lionDance'}),
@@ -60,7 +29,7 @@ export const aboutPage = defineType({
       rows: 5,
       group: 'lionDance',
     }),
-    photo('lionDanceImage', 'Lion dance photograph', 'lionDance'),
+    photoField('lionDanceImage', 'Lion dance photograph', 'lionDance'),
     defineField({
       name: 'dragonDanceHeading',
       title: 'Heading',
@@ -74,7 +43,7 @@ export const aboutPage = defineType({
       rows: 5,
       group: 'dragonDance',
     }),
-    photo('dragonDanceImage', 'Dragon dance photograph', 'dragonDance'),
+    photoField('dragonDanceImage', 'Dragon dance photograph', 'dragonDance'),
     defineField({
       name: 'valuesIntroduction',
       title: 'Introduction',

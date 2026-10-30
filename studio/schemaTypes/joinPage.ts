@@ -1,3 +1,4 @@
+import {heroFields} from './fields/hero'
 import {defineField, defineType} from 'sanity'
 import {DocumentIcon} from '@sanity/icons/Document'
 
@@ -12,36 +13,7 @@ export const joinPage = defineType({
     {name: 'contact', title: 'Contact'},
   ],
   fields: [
-    defineField({name: 'eyebrow', title: 'Introduction', type: 'string', group: 'hero'}),
-    defineField({
-      name: 'heroTitle',
-      title: 'Headline, first line',
-      type: 'string',
-      group: 'hero',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'heroHighlight',
-      title: 'Headline, second line',
-      type: 'string',
-      group: 'hero',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'heroImage',
-      title: 'Hero photograph',
-      type: 'image',
-      group: 'hero',
-      options: {hotspot: true},
-      fields: [
-        defineField({
-          name: 'alt',
-          title: 'Alternative text',
-          type: 'string',
-          validation: (rule) => rule.required(),
-        }),
-      ],
-    }),
+    ...heroFields(),
     defineField({name: 'storyHeading', type: 'string', group: 'story'}),
     defineField({name: 'storyText', type: 'text', rows: 5, group: 'story'}),
     defineField({name: 'contactHeading', type: 'string', group: 'contact'}),

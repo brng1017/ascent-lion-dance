@@ -17,14 +17,14 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: schema.json
 export type SanityImageAssetReference = {
   _ref: string;
-  _type: "reference";
+  _type: 'reference';
   _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
 };
 
 export type Sponsor = {
   _id: string;
-  _type: "sponsor";
+  _type: 'sponsor';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -35,13 +35,13 @@ export type Sponsor = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
-    _type: "image";
+    _type: 'image';
   };
   website?: string;
 };
 
 export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
+  _type: 'sanity.imageCrop';
   top?: number;
   bottom?: number;
   left?: number;
@@ -49,7 +49,7 @@ export type SanityImageCrop = {
 };
 
 export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
+  _type: 'sanity.imageHotspot';
   x?: number;
   y?: number;
   height?: number;
@@ -58,7 +58,7 @@ export type SanityImageHotspot = {
 
 export type PerformanceService = {
   _id: string;
-  _type: "performanceService";
+  _type: 'performanceService';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -73,20 +73,20 @@ export type PerformanceService = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
-    _type: "image";
+    _type: 'image';
   };
 };
 
 export type PerformanceServiceReference = {
   _ref: string;
-  _type: "reference";
+  _type: 'reference';
   _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "performanceService";
+  [internalGroqTypeReferenceTo]?: 'performanceService';
 };
 
 export type Page = {
   _id: string;
-  _type: "page";
+  _type: 'page';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -97,18 +97,18 @@ export type Page = {
     children?: Array<{
       marks?: Array<string>;
       text?: string;
-      _type: "span";
+      _type: 'span';
       _key: string;
     }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+    listItem?: 'bullet' | 'number';
     markDefs?: Array<{
       href?: string;
-      _type: "link";
+      _type: 'link';
       _key: string;
     }>;
     level?: number;
-    _type: "block";
+    _type: 'block';
     _key: string;
   }>;
   services?: Array<
@@ -119,14 +119,14 @@ export type Page = {
 };
 
 export type Slug = {
-  _type: "slug";
+  _type: 'slug';
   current?: string;
   source?: string;
 };
 
 export type JoinPage = {
   _id: string;
-  _type: "joinPage";
+  _type: 'joinPage';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -139,7 +139,7 @@ export type JoinPage = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
-    _type: "image";
+    _type: 'image';
   };
   storyHeading?: string;
   storyText?: string;
@@ -150,7 +150,7 @@ export type JoinPage = {
 
 export type ServicesPage = {
   _id: string;
-  _type: "servicesPage";
+  _type: 'servicesPage';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -163,14 +163,14 @@ export type ServicesPage = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
-    _type: "image";
+    _type: 'image';
   };
   introHeading?: string;
   introText?: string;
   bookingSteps?: Array<{
     title?: string;
     description?: string;
-    _type: "bookingStep";
+    _type: 'bookingStep';
     _key: string;
   }>;
   performanceOptions?: Array<{
@@ -180,16 +180,16 @@ export type ServicesPage = {
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
-      _type: "image";
+      _type: 'image';
     };
-    _type: "performanceOptionItem";
+    _type: 'performanceOptionItem';
     _key: string;
   }>;
 };
 
 export type AboutPage = {
   _id: string;
-  _type: "aboutPage";
+  _type: 'aboutPage';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -202,7 +202,7 @@ export type AboutPage = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
-    _type: "image";
+    _type: 'image';
   };
   storyHeading?: string;
   storyText?: string;
@@ -214,7 +214,7 @@ export type AboutPage = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
-    _type: "image";
+    _type: 'image';
   };
   dragonDanceHeading?: string;
   dragonDanceText?: string;
@@ -224,21 +224,21 @@ export type AboutPage = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
-    _type: "image";
+    _type: 'image';
   };
   valuesIntroduction?: string;
   valuesHeading?: string;
   values?: Array<{
     title?: string;
     text?: string;
-    _type: "aboutValue";
+    _type: 'aboutValue';
     _key: string;
   }>;
   journeyHeading?: string;
   milestones?: Array<{
     year?: string;
     text?: string;
-    _type: "milestone";
+    _type: 'milestone';
     _key: string;
   }>;
   galleryHeading?: string;
@@ -248,14 +248,14 @@ export type AboutPage = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
-    _type: "image";
+    _type: 'image';
     _key: string;
   }>;
 };
 
 export type HomePage = {
   _id: string;
-  _type: "homePage";
+  _type: 'homePage';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -268,7 +268,7 @@ export type HomePage = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
-    _type: "image";
+    _type: 'image';
   };
   occasions?: Array<string>;
   storyHeading?: string;
@@ -288,7 +288,7 @@ export type HomePage = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
-    _type: "image";
+    _type: 'image';
   };
   bookingHeading?: string;
   bookingDescription?: string;
@@ -298,7 +298,7 @@ export type HomePage = {
 };
 
 export type SanityImagePaletteSwatch = {
-  _type: "sanity.imagePaletteSwatch";
+  _type: 'sanity.imagePaletteSwatch';
   background?: string;
   foreground?: string;
   population?: number;
@@ -306,7 +306,7 @@ export type SanityImagePaletteSwatch = {
 };
 
 export type SanityImagePalette = {
-  _type: "sanity.imagePalette";
+  _type: 'sanity.imagePalette';
   darkMuted?: SanityImagePaletteSwatch;
   lightVibrant?: SanityImagePaletteSwatch;
   darkVibrant?: SanityImagePaletteSwatch;
@@ -317,14 +317,14 @@ export type SanityImagePalette = {
 };
 
 export type SanityImageDimensions = {
-  _type: "sanity.imageDimensions";
+  _type: 'sanity.imageDimensions';
   height?: number;
   width?: number;
   aspectRatio?: number;
 };
 
 export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
+  _type: 'sanity.imageMetadata';
   location?: Geopoint;
   dimensions?: SanityImageDimensions;
   palette?: SanityImagePalette;
@@ -337,7 +337,7 @@ export type SanityImageMetadata = {
 
 export type SanityFileAsset = {
   _id: string;
-  _type: "sanity.fileAsset";
+  _type: 'sanity.fileAsset';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -358,7 +358,7 @@ export type SanityFileAsset = {
 };
 
 export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
+  _type: 'sanity.assetSourceData';
   name?: string;
   id?: string;
   url?: string;
@@ -366,7 +366,7 @@ export type SanityAssetSourceData = {
 
 export type SanityImageAsset = {
   _id: string;
-  _type: "sanity.imageAsset";
+  _type: 'sanity.imageAsset';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -388,7 +388,7 @@ export type SanityImageAsset = {
 };
 
 export type Geopoint = {
-  _type: "geopoint";
+  _type: 'geopoint';
   lat?: number;
   lng?: number;
   alt?: number;
@@ -578,24 +578,6 @@ export type HOME_PAGE_QUERY_RESULT = {
 } | null;
 
 // Source: ../web/src/sanity/queries.ts
-// Variable: CONTENT_INDEX_QUERY
-// Query: {  "pages": *[_type == "page" && defined(slug.current)] | order(title asc) {    _id, title, summary, "slug": slug.current  },  "services": *[_type == "performanceService" && defined(slug.current)] | order(title asc) {    _id, title, summary, "slug": slug.current  }}
-export type CONTENT_INDEX_QUERY_RESULT = {
-  pages: Array<{
-    _id: string;
-    title: string | null;
-    summary: string | null;
-    slug: string | null;
-  }>;
-  services: Array<{
-    _id: string;
-    title: string | null;
-    summary: string | null;
-    slug: string | null;
-  }>;
-};
-
-// Source: ../web/src/sanity/queries.ts
 // Variable: PAGE_QUERY
 // Query: *[_type == "page" && slug.current == $slug][0] {    _id, title, summary, body,    services[]->{_id, title, summary, "slug": slug.current}  }
 export type PAGE_QUERY_RESULT = {
@@ -606,18 +588,18 @@ export type PAGE_QUERY_RESULT = {
     children?: Array<{
       marks?: Array<string>;
       text?: string;
-      _type: "span";
+      _type: 'span';
       _key: string;
     }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
+    style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal';
+    listItem?: 'bullet' | 'number';
     markDefs?: Array<{
       href?: string;
-      _type: "link";
+      _type: 'link';
       _key: string;
     }>;
     level?: number;
-    _type: "block";
+    _type: 'block';
     _key: string;
   }> | null;
   services: Array<{
@@ -653,12 +635,11 @@ declare global {
     '\n  *[_type == "aboutPage" && _id == "aboutPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, valuesIntroduction, valuesHeading,\n    lionDanceHeading, lionDanceText,\n    lionDanceImage {asset, alt, hotspot, crop},\n    dragonDanceHeading, dragonDanceText,\n    dragonDanceImage {asset, alt, hotspot, crop},\n    values[]{_key, title, text},\n    journeyHeading, milestones[]{_key, year, text},\n    galleryHeading,\n    galleryImages[]{_key, asset, alt, hotspot, crop},\n  }\n': ABOUT_PAGE_QUERY_RESULT;
     '\n  *[_type == "servicesPage" && _id == "servicesPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    introHeading, introText,\n    bookingSteps[]{_key, title, description},\n    performanceOptions[]{_key, title, image {asset, hotspot, crop}}\n  }\n': SERVICES_PAGE_QUERY_RESULT;
     '\n  *[_type == "homePage" && _id == "homePage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, storyUrl, servicesHeading,\n    "sponsors": *[_type == "sponsor"] | order(_createdAt asc, _id asc) {\n      _id, name, website, logo {asset, alt, hotspot, crop}\n    },\n    featuredServices[]->{\n      _id, title, tagline, summary, "slug": slug.current,\n      image {asset, alt, hotspot, crop}\n    },\n    communityHeading, communityText,\n    communityImage {asset, alt, hotspot, crop},\n    bookingHeading, bookingDescription, email, phone, instagramUrl\n  }\n': HOME_PAGE_QUERY_RESULT;
-    '{\n  "pages": *[_type == "page" && defined(slug.current)] | order(title asc) {\n    _id, title, summary, "slug": slug.current\n  },\n  "services": *[_type == "performanceService" && defined(slug.current)] | order(title asc) {\n    _id, title, summary, "slug": slug.current\n  }\n}': CONTENT_INDEX_QUERY_RESULT;
     '\n  *[_type == "page" && slug.current == $slug][0] {\n    _id, title, summary, body,\n    services[]->{_id, title, summary, "slug": slug.current}\n  }\n': PAGE_QUERY_RESULT;
     '\n  *[_type == "performanceService" && defined(slug.current)] | order(title asc) {\n    _id, title, eventTypeLabel, tagline, summary, "slug": slug.current,\n    image {asset, alt, hotspot, crop}\n  }\n': SERVICES_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too
-declare module "@sanity/client" {
+declare module '@sanity/client' {
   interface SanityQueries extends globalThis.SanityQueries {}
 }

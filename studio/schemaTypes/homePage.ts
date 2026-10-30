@@ -1,23 +1,7 @@
+import {heroFields} from './fields/hero'
+import {photoField} from './fields/photo'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {HomeIcon} from '@sanity/icons/Home'
-
-function photo(name: string, title: string, group: string) {
-  return defineField({
-    name,
-    title,
-    group,
-    type: 'image',
-    options: {hotspot: true},
-    fields: [
-      defineField({
-        name: 'alt',
-        title: 'Alternative text',
-        type: 'string',
-        validation: (rule) => rule.required(),
-      }),
-    ],
-  })
-}
 
 export const homePage = defineType({
   name: 'homePage',
@@ -32,22 +16,7 @@ export const homePage = defineType({
     {name: 'booking', title: 'Booking & contact'},
   ],
   fields: [
-    defineField({name: 'eyebrow', title: 'Introduction', type: 'string', group: 'hero'}),
-    defineField({
-      name: 'heroTitle',
-      title: 'Headline, first line',
-      type: 'string',
-      group: 'hero',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'heroHighlight',
-      title: 'Headline, second line',
-      type: 'string',
-      group: 'hero',
-      validation: (rule) => rule.required(),
-    }),
-    photo('heroImage', 'Hero photograph', 'hero'),
+    ...heroFields(),
     defineField({
       name: 'occasions',
       title: 'Celebration ribbon',
@@ -73,7 +42,7 @@ export const homePage = defineType({
     }),
     defineField({name: 'communityHeading', type: 'string', group: 'community'}),
     defineField({name: 'communityText', type: 'text', rows: 4, group: 'community'}),
-    photo('communityImage', 'Community photograph', 'community'),
+    photoField('communityImage', 'Community photograph', 'community'),
     defineField({name: 'bookingHeading', type: 'string', group: 'booking'}),
     defineField({name: 'bookingDescription', type: 'text', rows: 3, group: 'booking'}),
     defineField({

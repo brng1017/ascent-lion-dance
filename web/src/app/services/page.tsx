@@ -5,9 +5,10 @@ import { SiteHeader } from '@/components/site-header';
 import { PageHero } from '@/components/page-hero';
 import { siteConfig } from '@/config/site';
 import { getHomePage, getServices, getServicesPage } from '@/sanity/content';
-import { serviceDefaults } from '@/sanity/home-defaults';
+import { performanceServiceDefaults } from '@/sanity/performance-service-defaults';
 import { servicesDefaults } from '@/sanity/services-defaults';
 import { imageUrl } from '@/sanity/image';
+import { sortServicesByFeatured } from '@/sanity/service-order';
 
 export const metadata: Metadata = {
   title: 'Our Services | Ascent Dragon & Lion Dance',
@@ -33,29 +34,20 @@ export default async function ServicesPage() {
   );
   const heroPhoto = content ? content.heroImage : home?.heroImage;
   const heroImage = heroPhoto?.asset ? imageUrl(heroPhoto, 1920, 1280) : null;
-  const featuredIds = (home?.featuredServices ?? []).flatMap((service) =>
-    service ? [service._id] : [],
-  );
-  const featuredOrder = new Map(featuredIds.map((id, index) => [id, index]));
   const services = publishedServices.length
-    ? [...publishedServices]
-        .sort(
-          (a, b) =>
-            (featuredOrder.get(a._id) ?? featuredIds.length) -
-            (featuredOrder.get(b._id) ?? featuredIds.length),
-        )
-        .map((service) => ({
-          id: service._id,
-          anchor: service.slug || service._id,
-          eventType: service.eventTypeLabel?.trim() || service.title || '',
-          title: service.title ?? 'Lion dance performance',
-          summary: service.summary,
-          image: service.image?.asset
-            ? imageUrl(service.image, 1200, 850)
-            : null,
-          imageAlt: service.image?.alt ?? service.title ?? '',
-        }))
-    : serviceDefaults.map((service) => ({
+    ? sortServicesByFeatured(
+        publishedServices,
+        home?.featuredServices ?? [],
+      ).map((service) => ({
+        id: service._id,
+        anchor: service.slug || service._id,
+        eventType: service.eventTypeLabel?.trim() || service.title || '',
+        title: service.title ?? 'Lion dance performance',
+        summary: service.summary,
+        image: service.image?.asset ? imageUrl(service.image, 1200, 850) : null,
+        imageAlt: service.image?.alt ?? service.title ?? '',
+      }))
+    : performanceServiceDefaults.map((service) => ({
         id: service.slug,
         anchor: service.slug,
         eventType: service.eventTypeLabel,

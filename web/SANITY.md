@@ -30,9 +30,10 @@ On Windows with restricted PowerShell script execution, use `npm.cmd` and
 The homepage has a dedicated **Home Page** singleton at the top of the Studio
 sidebar. It contains hero copy and photography, the story,
 featured service references, community content, booking copy, and contact details.
-The new homepage and additional service documents are drafts for review. The
-frontend uses matching starter content from `src/sanity/home-defaults.ts` until
-the Home Page is published. Publish featured services first, then Home Page.
+The frontend uses starter content from `src/sanity/home-defaults.ts` when Home
+Page content is unavailable. Service fallbacks live in
+`src/sanity/performance-service-defaults.ts`. Publish featured services first,
+then Home Page.
 Saving edits creates a draft; the public website only reads published documents.
 Use **Publish** on Home Page to apply a new hero image or other edits.
 Draft previews are not configured.
@@ -72,7 +73,7 @@ Unpublish or delete a sponsor to remove it from the banner.
 - **Event type label** on each Performance Service provides the singular booking
   form option, such as Wedding or Grand Opening. It does not change service titles
   on the homepage or services page. Publish label edits to update the booking form.
-- `/` lists published pages and services.
+- `/` renders Home Page content and its featured services.
 - `/pages/[slug]` renders a website page.
 - Service links open matching sections on `/services`; individual service routes
   have been removed.
@@ -94,9 +95,7 @@ and the same fixed "Book a show" action.
 
 Its **Introduction** tab controls the cream section immediately below the hero:
 a heading and team/services summary. Separate paragraphs with a blank line.
-The frontend uses matching starter copy until these fields are published. The
-optional `scripts/add-services-introduction.ts` script fills missing introduction
-fields in a draft, preserving existing editorial content.
+The frontend uses matching starter copy until these fields are published.
 
 **Performance options** are managed in the **Services Page → Performance options**
 tab. Each item has only a title and photograph. Drag items into display order,
@@ -105,28 +104,15 @@ Dance, Dragon Dance, LED Lion, Benches, Jongs, and other performance elements.
 They do not add event types to the booking form. Items without a title or photo
 are hidden, and an empty published list hides the section.
 
-The five existing options were copied into the Services Page draft, preserving
-image references, crops, and hotspots. A published Services Page was created
-using the previously displayed starter copy, homepage hero photograph, and the
-two already-published options. Pending page edits and the remaining options
-stay in the draft for review. The old standalone documents and schema have been
-removed; the frontend now reads only the ordered page list.
+Performance options are embedded in Services Page; they are not separate
+documents. The frontend reads only the published page's ordered list.
 
-Migration backups are stored under `studio/.sanity/backups`. The one-time
-`scripts/embed-performance-options.mjs` copied the draft list, and
-`scripts/finalize-performance-options.mjs` verified the copies, preserved the
-draft, and atomically created the published page and removed the old records.
-The optional `scripts/create-performance-options.ts` seeds missing starter titles
-into the Services Page draft list without publishing.
+Migration backups are stored under `studio/.sanity/backups`. The completed setup
+and migration scripts have been removed. Manage content directly in Studio.
 
 Review the Services Page draft in Studio, then publish it to apply pending changes
 to the public `/services` page. The published page has its own hero image
 reference; later homepage edits do not affect it.
-Rerun `npx sanity exec scripts/create-services-page.ts --with-user-token`
-from `studio` if needed; the script preserves an existing Services Page.
-The one-time `scripts/simplify-page-content.ts` cleanup removes the old settings
-from saved page documents and adds the third booking step to a draft without
-publishing editorial changes.
 
 The **About Page** singleton manages `/about` independently: hero introduction,
 headline and photograph; story heading and text; values introduction, heading,
@@ -136,12 +122,9 @@ match Home Page and Services Page. Search metadata, navigation destinations, and
 button labels stay in code.
 
 Review and publish About Page in Studio to display its content and images. Before
-publication, the route uses its own starter copy and no photographs. Its seed
-script copies the existing hero image reference once, preserving
-its crop and alt text; subsequent homepage edits do not affect About Page.
-Run `npx sanity exec scripts/create-about-page.ts --with-user-token` from `studio`
-to seed a missing draft; existing content is preserved. The shared footer still
-uses global contact content from Home Page.
+publication, the route uses its own starter copy and no photographs. About Page
+photographs are managed independently of Home Page. The shared footer still uses
+global contact content from Home Page.
 
 About Page also includes **What is lion dance?** (heading, description, and
 photograph) and **Our journey** (heading and ordered year/description milestones).
@@ -149,9 +132,7 @@ photograph) and **Our journey** (heading and ordered year/description milestones
 description, and photograph controls. The two sections use the same layout.
 The white story section remains separate. Values cards are numbered automatically.
 The timeline is horizontal on desktop and vertical on phones. Replace the marked
-placeholder years and milestones in Studio, then publish About Page. The optional
-`scripts/update-about-sections.ts` script adds missing fields to a draft while
-preserving existing copy and images.
+placeholder years and milestones in Studio, then publish About Page.
 
 The **Photo gallery** tab on About Page controls the final gallery section.
 Upload or choose images, enter required alternative text,
@@ -168,14 +149,11 @@ heading, text, and team email. The page uses the shared hero, fixed booking
 action, and fixed email button label. Search metadata stays in code.
 
 Review and publish Join Page to display its content and photograph. Until then,
-the page uses its own starter copy and no hero photograph. Its seed script copies
-the homepage hero image reference once; later homepage changes do not affect it.
-Run `npx sanity exec scripts/create-join-page.ts --with-user-token` from `studio`
-to seed a missing draft. Existing Join Page content is preserved.
+the page uses its own starter copy and no hero photograph. Its hero photograph is
+managed independently of Home Page.
 
-Three sample documents were created as drafts for review in Studio. Edit their
-placeholder copy and publish when ready. Unpublished drafts do not appear on the
-website; draft previews and Visual Editing are not configured.
+Unpublished drafts do not appear on the website; draft previews and Visual
+Editing are not configured.
 
 The frontend uses `next-sanity` Live Content with Next.js Cache Components.
 Cached query helpers live in `src/sanity/content.ts`, and `SanityLive` listens
@@ -193,14 +171,6 @@ npx sanity schemas deploy
 
 TypeGen scans `../web/src` and writes `web/sanity.types.ts`. Commit the generated
 types and `studio/schema.json`; do not edit the generated types manually.
-
-The optional sample script can be rerun from `studio`:
-
-```sh
-npx sanity exec scripts/create-sample-drafts.ts --with-user-token
-```
-
-It checks existing slugs before creating any drafts. It does not publish content.
 
 ## Deployment
 

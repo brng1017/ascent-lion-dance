@@ -1,4 +1,4 @@
-import { Arrow } from '@/components/arrow';
+import { Arrow } from './arrow';
 import Image from 'next/image';
 import { siteConfig } from '@/config/site';
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { Arrow } from '@/components/arrow';
+import { Arrow } from './arrow';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -114,7 +114,9 @@ export function ServicesCarousel({ services }: { services: Service[] }) {
               onClick={() => move(direction)}
               className='pointer-events-auto flex size-12 items-center justify-center rounded-full border border-white/30 text-white transition-colors hover:border-gold hover:text-gold disabled:cursor-default disabled:opacity-30 sm:bg-ink/80 sm:shadow-lg sm:backdrop-blur-sm'
             >
-              <Arrow className={`size-5 ${direction === -1 ? 'rotate-180' : ''}`} />
+              <Arrow
+                className={`size-5 ${direction === -1 ? 'rotate-180' : ''}`}
+              />
             </button>
           ))}
         </div>

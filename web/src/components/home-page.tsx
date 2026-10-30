@@ -1,9 +1,10 @@
-import { Arrow } from '@/components/arrow';
+import { Arrow } from './arrow';
 import Image from 'next/image';
 import { siteConfig } from '@/config/site';
 import Link from 'next/link';
 import type { HOME_PAGE_QUERY_RESULT } from '../../sanity.types';
-import { homeDefaults, serviceDefaults } from '@/sanity/home-defaults';
+import { homeDefaults } from '@/sanity/home-defaults';
+import { performanceServiceDefaults } from '@/sanity/performance-service-defaults';
 import { imageUrl, logoUrl } from '@/sanity/image';
 import { SiteHeader } from './site-header';
 import { PageHero } from './page-hero';
@@ -28,8 +29,6 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
       content?.bookingDescription ?? homeDefaults.bookingDescription,
     bookingUrl: siteConfig.bookingUrl,
     email: content?.email ?? homeDefaults.email,
-    phone: content?.phone ?? homeDefaults.phone,
-    instagramUrl: content?.instagramUrl ?? homeDefaults.instagramUrl,
   };
   const heroImage = content?.heroImage?.asset
     ? imageUrl(content.heroImage, 1920, 1280)
@@ -39,7 +38,7 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
     : null;
   const publishedServices =
     content?.featuredServices?.filter((service) => service !== null) ?? [];
-  const publishedSponsors = (content?.sponsors ?? []).flatMap((sponsor) =>
+  const sponsors: Sponsor[] = (content?.sponsors ?? []).flatMap((sponsor) =>
     sponsor?.name
       ? [
           {
@@ -52,19 +51,17 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
         ]
       : [],
   );
-  const sponsors: Sponsor[] = publishedSponsors;
   const services = publishedServices.length
     ? publishedServices.map((service) => ({
         key: service._id,
         title: service.title ?? 'Performance',
         tagline: service.tagline ?? 'Make it memorable',
-        summary: service.summary,
         href: `/services#service-${service.slug || service._id}`,
         image: service.image?.asset ? imageUrl(service.image, 700, 900) : null,
         imageAlt:
           service.image?.alt ?? service.title ?? 'Lion dance performance',
       }))
-    : serviceDefaults.map((service) => ({
+    : performanceServiceDefaults.map((service) => ({
         ...service,
         key: service.slug,
         href: `/services#service-${service.slug}`,
@@ -183,7 +180,7 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
               <div className='max-w-70'>
                 <Link
                   href='/services'
-                    className='inline-flex items-center gap-4 text-xs font-semibold text-gold'
+                  className='inline-flex items-center gap-4 text-xs font-semibold text-gold'
                 >
                   Explore all services <Arrow diagonal />
                 </Link>

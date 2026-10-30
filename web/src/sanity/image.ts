@@ -1,8 +1,8 @@
 import {
   createImageUrlBuilder,
   type SanityImageSource,
-} from "@sanity/image-url";
-import { client } from "./client";
+} from '@sanity/image-url';
+import { client } from './client';
 
 const builder = createImageUrlBuilder(client);
 
@@ -14,8 +14,8 @@ export function logoUrl(source: SanityImageSource) {
     .ignoreImageParams()
     .width(480)
     .height(160)
-    .fit("max")
-    .auto("format")
+    .fit('max')
+    .auto('format')
     .url();
 }
 
@@ -23,13 +23,13 @@ export function imageUrl(
   source: SanityImageSource,
   width: number,
   height: number,
-  fit: "crop" | "max" = "crop",
+  fit: 'crop' | 'max' = 'crop',
 ) {
   return builder
     .image(source)
     .width(width)
     .height(height)
     .fit(fit)
-    .auto("format")
+    .auto('format')
     .url();
 }

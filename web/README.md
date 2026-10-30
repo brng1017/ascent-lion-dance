@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ascent website
 
-## Getting Started
+The Next.js App Router frontend for Ascent Dragon & Lion Dance. Styling uses
+Tailwind CSS, and published content comes from the standalone Sanity Studio in
+../studio.
 
-First, run the development server:
+## Local development
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Install dependencies with npm ci, then copy .env.example to .env.local and
+run npm run dev. Open http://localhost:3000.
+
+On Windows with restricted PowerShell execution, use npm.cmd and npx.cmd.
+
+## Checks and production build
+
+```sh
+npm run lint
+npx tsc --noEmit
+npm run build
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The build checks TypeScript as well as compiling the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- src/app: homepage, About, Services, Join, booking, and generic content routes.
+- src/components: shared layout, hero, carousels, gallery, form, and icons.
+- src/config/site.ts: shared booking destination and button labels.
+- src/sanity: published-content queries, cached fetching, images, and fallbacks.
+- sanity.types.ts: generated from the Studio schema and GROQ queries.
+- public/images: local brand logo and image source credits.
 
-## Learn More
+Use the formatting settings in .prettierrc.json when editing frontend code.
+Regenerate Sanity types from ../studio using npm run typegen; do not edit the
+generated file manually.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [SANITY.md](SANITY.md) for content management and deployment, and
+[BOOKING.md](BOOKING.md) for EmailJS configuration and booking form behavior.
