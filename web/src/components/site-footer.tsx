@@ -1,6 +1,8 @@
+import { Arrow } from '@/components/arrow';
 import { Brand } from "./site-header";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
+import { FaInstagram } from "react-icons/fa";
 import { getHomePage } from "@/sanity/content";
 import { homeDefaults } from "@/sanity/home-defaults";
 
@@ -54,17 +56,9 @@ export async function SiteFooter() {
             target="_blank"
             rel="noreferrer"
           >
+            <FaInstagram aria-hidden="true" className="size-4 shrink-0" />
             Follow the journey{" "}
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              className="size-3"
-            >
-              <path d="M6 18 18 6M6 6h12v12" />
-            </svg>
+            <Arrow diagonal />
           </a>
         </div>
       </div>

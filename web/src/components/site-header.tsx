@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { Arrow } from './arrow';
 import { siteConfig } from '@/config/site';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -90,12 +91,10 @@ export function SiteHeader() {
         </nav>
         <a
           href={siteConfig.bookingUrl}
-          className='hidden rounded-full bg-crimson px-6 py-3.5 text-xs font-bold text-white transition-colors hover:bg-crimson-light md:inline-flex'
+          className='hidden items-center rounded-full bg-crimson px-6 py-3.5 text-xs font-bold text-white transition-colors hover:bg-crimson-light md:inline-flex'
         >
           {siteConfig.bookingLabel}{' '}
-          <span aria-hidden='true' className='ml-5'>
-            ↗
-          </span>
+          <Arrow diagonal className='ml-5 size-4' />
         </a>
         <button
           ref={toggle}
@@ -143,7 +142,7 @@ export function SiteHeader() {
               href={siteConfig.bookingUrl}
               className='mt-5 flex items-center justify-between rounded-full bg-crimson px-5 py-4 font-bold'
             >
-              {siteConfig.bookingLabel} <span aria-hidden='true'>↗</span>
+              {siteConfig.bookingLabel} <Arrow diagonal />
             </a>
           </nav>
         )}

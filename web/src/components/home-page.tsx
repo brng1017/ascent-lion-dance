@@ -1,3 +1,4 @@
+import { Arrow } from '@/components/arrow';
 import Image from 'next/image';
 import { siteConfig } from '@/config/site';
 import Link from 'next/link';
@@ -8,27 +9,6 @@ import { SiteHeader } from './site-header';
 import { PageHero } from './page-hero';
 import { ServicesCarousel } from './services-carousel';
 import { SponsorsBanner, type Sponsor } from './sponsors-banner';
-
-function Arrow({
-  diagonal = false,
-  className = '',
-}: {
-  diagonal?: boolean;
-  className?: string;
-}) {
-  return (
-    <svg
-      aria-hidden='true'
-      viewBox='0 0 24 24'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth='1.5'
-      className={`size-5 ${className}`}
-    >
-      <path d={diagonal ? 'M6 18 18 6M6 6h12v12' : 'M4 12h16m-6-6 6 6-6 6'} />
-    </svg>
-  );
-}
 
 const values = ['Culture', 'Community', 'Tradition', 'Celebration'];
 

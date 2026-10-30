@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { Arrow } from './arrow';
 
 export type Sponsor = {
   id: string;
@@ -111,7 +112,7 @@ export function SponsorsBanner({
             href={`mailto:${email}?subject=Ascent%20sponsorship`}
             className='inline-flex min-h-11 items-center gap-5 text-xs font-semibold text-crimson'
           >
-            Become a sponsor <span aria-hidden='true'>↗</span>
+            Become a sponsor <Arrow diagonal />
           </a>
         </div>
       )}

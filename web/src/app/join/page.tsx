@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Arrow } from '@/components/arrow';
 import { PageHero } from '@/components/page-hero';
 import { SiteHeader } from '@/components/site-header';
 import { getJoinPage } from '@/sanity/content';
@@ -89,7 +90,7 @@ export default async function JoinPage() {
                   href={`mailto:${email}?subject=Joining%20the%20Ascent%20team`}
                   className='inline-flex min-h-12 items-center gap-8 rounded-full bg-ink px-7 py-5 text-xs font-bold transition-colors hover:bg-ink-light'
                 >
-                  Email the team <span aria-hidden='true'>↗</span>
+                  Email the team <Arrow diagonal />
                 </a>
               </div>
             </div>

@@ -1,3 +1,4 @@
+import { Arrow } from '@/components/arrow';
 import Image from 'next/image';
 import { siteConfig } from '@/config/site';
 
@@ -61,16 +62,7 @@ export function PageHero({
             className='mt-9 inline-flex min-h-12 w-fit items-center gap-8 rounded-full bg-crimson px-7 py-4 text-xs font-bold transition-colors hover:bg-crimson-light'
           >
             {siteConfig.bookingLabel}
-            <svg
-              aria-hidden='true'
-              viewBox='0 0 24 24'
-              fill='none'
-              stroke='currentColor'
-              strokeWidth='1.5'
-              className='size-4'
-            >
-              <path d='M4 12h16m-6-6 6 6-6 6' />
-            </svg>
+            <Arrow className='size-4' />
           </a>
         )}
       </section>

@@ -1,3 +1,4 @@
+import { Arrow } from '@/components/arrow';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { SiteHeader } from '@/components/site-header';
@@ -13,21 +14,6 @@ export const metadata: Metadata = {
   description:
     'Celebrate Lunar New Year, grand openings, weddings, banquets, birthdays, and company events with Ascent Lion Dance in Denver.',
 };
-
-function Arrow() {
-  return (
-    <svg
-      aria-hidden='true'
-      viewBox='0 0 24 24'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth='1.5'
-      className='size-4'
-    >
-      <path d='M4 12h16m-6-6 6 6-6 6' />
-    </svg>
-  );
-}
 
 export default async function ServicesPage() {
   const [home, publishedServices, content] = await Promise.all([

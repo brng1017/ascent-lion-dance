@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Arrow } from '@/components/arrow';
 import Image from 'next/image';
 import { PageHero } from '@/components/page-hero';
 import { PhotoGallery } from '@/components/photo-gallery';
@@ -264,7 +265,7 @@ export default async function AboutPage() {
                 aria-label='More photos on Instagram (opens in a new tab)'
                 className='inline-flex min-h-12 items-center gap-8 rounded-full bg-crimson px-7 py-4 text-xs font-bold text-white transition-colors hover:bg-crimson-light'
               >
-                More <span aria-hidden='true'>↗</span>
+                More <Arrow diagonal />
               </a>
             </div>
           </section>

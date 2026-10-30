@@ -1,5 +1,7 @@
 'use client';
 
+import { Arrow } from '@/components/arrow';
+
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
@@ -126,16 +128,7 @@ export function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
                   aria-label='Previous photo'
                   className='absolute bottom-5 left-6 flex size-12 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-ink/80 text-white shadow-lg backdrop-blur-sm transition-colors hover:border-gold hover:text-gold sm:top-1/2 sm:bottom-auto sm:-translate-y-1/2'
                 >
-                  <svg
-                    aria-hidden='true'
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='1.5'
-                    className='size-5 rotate-180'
-                  >
-                    <path d='M4 12h16m-6-6 6 6-6 6' />
-                  </svg>
+                  <Arrow className='size-5 rotate-180' />
                 </button>
                 <button
                   type='button'
@@ -143,16 +136,7 @@ export function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
                   aria-label='Next photo'
                   className='absolute right-6 bottom-5 flex size-12 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-ink/80 text-white shadow-lg backdrop-blur-sm transition-colors hover:border-gold hover:text-gold sm:top-1/2 sm:bottom-auto sm:-translate-y-1/2'
                 >
-                  <svg
-                    aria-hidden='true'
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='1.5'
-                    className='size-5'
-                  >
-                    <path d='M4 12h16m-6-6 6 6-6 6' />
-                  </svg>
+                  <Arrow className='size-5' />
                 </button>
               </>
             )}

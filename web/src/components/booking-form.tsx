@@ -2,6 +2,7 @@
 
 import { useRef, useState, type FormEvent } from "react";
 import emailjs from "@emailjs/browser";
+import { Arrow } from './arrow';
 
 const inputClass =
   "mt-2 min-h-12 w-full rounded-lg border border-white/10 bg-ink px-4 py-3 font-body text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-gold focus-visible:outline-none! disabled:opacity-60 [color-scheme:dark]";
@@ -334,7 +335,7 @@ export function BookingForm({
         className="mt-7 flex min-h-12 w-full items-center justify-center gap-3 rounded-full bg-crimson px-6 py-4 text-xs font-bold text-white transition-colors hover:bg-crimson-light disabled:cursor-wait disabled:opacity-60"
       >
         {status === "sending" ? "Sending request…" : "Send request"}
-        <span aria-hidden="true">{status === "sending" ? "…" : "↗"}</span>
+        {status === "sending" ? <span aria-hidden="true">…</span> : <Arrow diagonal />}
       </button>
       <p className="mt-4 text-center font-body text-[11px] leading-5 text-white/40">
         Submitting a request does not confirm your booking.
