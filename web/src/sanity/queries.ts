@@ -68,12 +68,6 @@ export const PAGE_QUERY = defineQuery(`
   }
 `);
 
-export const SERVICE_QUERY = defineQuery(`
-  *[_type == "performanceService" && slug.current == $slug][0] {
-    _id, title, summary, body
-  }
-`);
-
 export const SERVICES_QUERY = defineQuery(`
   *[_type == "performanceService" && defined(slug.current)] | order(title asc) {
     _id, title, eventTypeLabel, tagline, summary, "slug": slug.current,

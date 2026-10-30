@@ -649,33 +649,6 @@ export type PAGE_QUERY_RESULT = {
 } | null;
 
 // Source: ../web/src/sanity/queries.ts
-// Variable: SERVICE_QUERY
-// Query: *[_type == "performanceService" && slug.current == $slug][0] {    _id, title, summary, body  }
-export type SERVICE_QUERY_RESULT = {
-  _id: string;
-  title: string | null;
-  summary: string | null;
-  body: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }> | null;
-} | null;
-
-// Source: ../web/src/sanity/queries.ts
 // Variable: SERVICES_QUERY
 // Query: *[_type == "performanceService" && defined(slug.current)] | order(title asc) {    _id, title, eventTypeLabel, tagline, summary, "slug": slug.current,    image {asset, alt, hotspot, crop}  }
 export type SERVICES_QUERY_RESULT = Array<{
@@ -702,7 +675,6 @@ declare global {
     '\n  *[_type == "homePage" && _id == "homePage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, storyUrl, servicesHeading, servicesDescription,\n    "sponsors": *[_type == "sponsor"] | order(_createdAt asc, _id asc) {\n      _id, name, website, logo {asset, alt, hotspot, crop}\n    },\n    featuredServices[]->{\n      _id, title, tagline, summary, "slug": slug.current,\n      image {asset, alt, hotspot, crop}\n    },\n    communityHeading, communityText,\n    communityImage {asset, alt, hotspot, crop},\n    bookingHeading, bookingDescription, email, phone, instagramUrl\n  }\n': HOME_PAGE_QUERY_RESULT;
     '{\n  "pages": *[_type == "page" && defined(slug.current)] | order(title asc) {\n    _id, title, summary, "slug": slug.current\n  },\n  "services": *[_type == "performanceService" && defined(slug.current)] | order(title asc) {\n    _id, title, summary, "slug": slug.current\n  }\n}': CONTENT_INDEX_QUERY_RESULT;
     '\n  *[_type == "page" && slug.current == $slug][0] {\n    _id, title, summary, body,\n    services[]->{_id, title, summary, "slug": slug.current}\n  }\n': PAGE_QUERY_RESULT;
-    '\n  *[_type == "performanceService" && slug.current == $slug][0] {\n    _id, title, summary, body\n  }\n': SERVICE_QUERY_RESULT;
     '\n  *[_type == "performanceService" && defined(slug.current)] | order(title asc) {\n    _id, title, eventTypeLabel, tagline, summary, "slug": slug.current,\n    image {asset, alt, hotspot, crop}\n  }\n': SERVICES_QUERY_RESULT;
   }
 }

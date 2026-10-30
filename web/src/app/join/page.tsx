@@ -91,12 +91,6 @@ export default async function JoinPage() {
                 >
                   Email the team <span aria-hidden='true'>↗</span>
                 </a>
-                <a
-                  href={`mailto:${email}`}
-                  className='max-w-full break-all font-body text-xs text-white/85 underline decoration-white/40 underline-offset-4 hover:decoration-white'
-                >
-                  {email}
-                </a>
               </div>
             </div>
           </div>

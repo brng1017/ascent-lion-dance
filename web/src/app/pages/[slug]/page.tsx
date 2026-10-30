@@ -18,9 +18,9 @@ export default async function WebsitePage({ params }: { params: Promise<{ slug: 
         <section>
           <h2 className="text-2xl font-semibold">Performance services</h2>
           <ul className="mt-4 space-y-3">
-            {page.services.map((service) => service?.slug && (
+            {page.services.map((service) => service && (
               <li key={service._id}>
-                <Link className="underline" href={`/services/${service.slug}`}>{service.title}</Link>
+                <Link className="underline" href={`/services#service-${service.slug || service._id}`}>{service.title}</Link>
               </li>
             ))}
           </ul>

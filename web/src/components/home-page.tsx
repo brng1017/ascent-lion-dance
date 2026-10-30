@@ -86,7 +86,7 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
         title: service.title ?? 'Performance',
         tagline: service.tagline ?? 'Make it memorable',
         summary: service.summary,
-        href: service.slug ? `/services/${service.slug}` : home.bookingUrl,
+        href: `/services#service-${service.slug || service._id}`,
         image: service.image?.asset ? imageUrl(service.image, 700, 900) : null,
         imageAlt:
           service.image?.alt ?? service.title ?? 'Lion dance performance',
@@ -94,7 +94,7 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
     : serviceDefaults.map((service) => ({
         ...service,
         key: service.slug,
-        href: home.bookingUrl,
+        href: `/services#service-${service.slug}`,
         image: null,
         imageAlt: service.title,
       }));

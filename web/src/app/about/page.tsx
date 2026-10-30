@@ -104,7 +104,7 @@ export default async function AboutPage() {
               ))}
             </div>
           </div>
-          <div className='relative aspect-[4/3] overflow-hidden rounded-2xl bg-ink-light'>
+          <div className='relative aspect-4/3 overflow-hidden rounded-2xl bg-ink-light'>
             {lionDanceImage ? (
               <Image
                 src={lionDanceImage}
@@ -146,7 +146,7 @@ export default async function AboutPage() {
               ))}
             </div>
           </div>
-          <div className='relative aspect-[4/3] overflow-hidden rounded-2xl bg-ink-light md:order-1'>
+          <div className='relative aspect-4/3 overflow-hidden rounded-2xl bg-ink-light md:order-1'>
             {dragonDanceImage ? (
               <Image
                 src={dragonDanceImage}

@@ -36,8 +36,9 @@ the Home Page is published. Publish featured services first, then Home Page.
 Saving edits creates a draft; the public website only reads published documents.
 Use **Publish** on Home Page to apply a new hero image or other edits.
 Draft previews are not configured.
-Only published references link to service detail routes; starter service cards
-lead to the existing Ascent booking form.
+Homepage service cards link to the matching service section on `/services`,
+including starter cards. Section anchors use the service slug, falling back to
+the document ID. Scrolling respects the fixed header offset.
 
 Services display in a looping carousel with previous/next buttons: one card on
 phones, two on tablets, and four on desktop. The featured services array has no
@@ -73,7 +74,8 @@ Unpublish or delete a sponsor to remove it from the banner.
   on the homepage or services page. Publish label edits to update the booking form.
 - `/` lists published pages and services.
 - `/pages/[slug]` renders a website page.
-- `/services/[slug]` renders a performance service.
+- Service links open matching sections on `/services`; individual service routes
+  have been removed.
 
 The `/services` page lists all published performance services, using their titles,
 summaries, and images. Homepage featured services appear first, in their chosen

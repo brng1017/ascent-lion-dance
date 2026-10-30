@@ -46,7 +46,7 @@ export function SponsorsBanner({
           tabIndex={0}
           role='group'
           aria-label='Sponsor banner'
-          className='group overflow-hidden mask-[linear-gradient(to_right,transparent,black_6%,black_94%,transparent)] motion-reduce:overflow-x-auto motion-reduce:[mask-image:none]'
+          className='group overflow-hidden mask-[linear-gradient(to_right,transparent,black_6%,black_94%,transparent)] motion-reduce:overflow-x-auto motion-reduce:mask-none'
         >
           <div
             data-sponsor-track

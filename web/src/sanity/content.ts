@@ -6,7 +6,6 @@ import {
   CONTENT_INDEX_QUERY,
   HOME_PAGE_QUERY,
   PAGE_QUERY,
-  SERVICE_QUERY,
   SERVICES_QUERY,
   SERVICES_PAGE_QUERY,
 } from "./queries";
@@ -82,13 +81,3 @@ export async function getPage(slug: string) {
   return data;
 }
 
-export async function getService(slug: string) {
-  "use cache";
-  const { data } = await sanityFetch({
-    query: SERVICE_QUERY,
-    params: { slug },
-    perspective: "published",
-    stega: false,
-  });
-  return data;
-}
