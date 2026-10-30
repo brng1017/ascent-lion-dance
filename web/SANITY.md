@@ -68,7 +68,7 @@ When no sponsors are published, the banner shows a sponsorship contact link.
 Unpublish or delete a sponsor to remove it from the banner.
 
 - **Website Page**: title, slug, summary, rich text, and references to performance services.
-- **Performance Service**: title, slug, summary, and rich text.
+- **Performance Service**: title, slug, summary, event type label, tagline, and photograph.
 - **Event type label** on each Performance Service provides the singular booking
   form option, such as Wedding or Grand Opening. It does not change service titles
   on the homepage or services page. Publish label edits to update the booking form.

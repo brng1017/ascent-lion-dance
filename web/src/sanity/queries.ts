@@ -38,7 +38,7 @@ export const HOME_PAGE_QUERY = defineQuery(`
   *[_type == "homePage" && _id == "homePage"][0] {
     eyebrow, heroTitle, heroHighlight,
     heroImage {asset, alt, hotspot, crop},
-    storyHeading, storyText, storyUrl, servicesHeading, servicesDescription,
+    storyHeading, storyText, storyUrl, servicesHeading,
     "sponsors": *[_type == "sponsor"] | order(_createdAt asc, _id asc) {
       _id, name, website, logo {asset, alt, hotspot, crop}
     },

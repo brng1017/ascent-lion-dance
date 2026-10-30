@@ -19,11 +19,6 @@ const contentFields = [
         ),
   }),
   defineField({name: 'summary', type: 'text', rows: 3}),
-  defineField({
-    name: 'body',
-    type: 'array',
-    of: [defineArrayMember({type: 'block'})],
-  }),
 ]
 
 export const performanceService = defineType({
@@ -63,6 +58,11 @@ export const page = defineType({
   icon: DocumentIcon,
   fields: [
     ...contentFields,
+    defineField({
+      name: 'body',
+      type: 'array',
+      of: [defineArrayMember({type: 'block'})],
+    }),
     defineField({
       name: 'services',
       title: 'Featured performance services',

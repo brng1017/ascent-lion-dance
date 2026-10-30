@@ -2,10 +2,7 @@ import Image from 'next/image';
 import { siteConfig } from '@/config/site';
 import Link from 'next/link';
 import type { HOME_PAGE_QUERY_RESULT } from '../../sanity.types';
-import {
-  homeDefaults,
-  serviceDefaults,
-} from '@/sanity/home-defaults';
+import { homeDefaults, serviceDefaults } from '@/sanity/home-defaults';
 import { imageUrl, logoUrl } from '@/sanity/image';
 import { SiteHeader } from './site-header';
 import { PageHero } from './page-hero';
@@ -43,8 +40,6 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
     storyHeading: content?.storyHeading ?? homeDefaults.storyHeading,
     storyText: content?.storyText ?? homeDefaults.storyText,
     servicesHeading: content?.servicesHeading ?? homeDefaults.servicesHeading,
-    servicesDescription:
-      content?.servicesDescription ?? homeDefaults.servicesDescription,
     communityHeading:
       content?.communityHeading ?? homeDefaults.communityHeading,
     communityText: content?.communityText ?? homeDefaults.communityText,
@@ -71,9 +66,7 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
             id: sponsor._id,
             name: sponsor.name,
             website: sponsor.website,
-            logo: sponsor.logo?.asset
-              ? logoUrl(sponsor.logo)
-              : undefined,
+            logo: sponsor.logo?.asset ? logoUrl(sponsor.logo) : undefined,
             logoAlt: sponsor.logo?.alt ?? sponsor.name,
           },
         ]
@@ -170,7 +163,7 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
                 href='/about'
                 className='mt-7 inline-flex items-center gap-8 border-b border-crimson/30 pb-2 text-xs font-bold text-crimson transition-colors hover:border-crimson'
               >
-                Get to know Ascent <Arrow />
+                Get to know us <Arrow />
               </Link>
             </div>
           </div>
@@ -208,12 +201,9 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
                 </h2>
               </div>
               <div className='max-w-70'>
-                <p className='font-body text-xs leading-7 text-white/60'>
-                  {home.servicesDescription}
-                </p>
                 <Link
                   href='/services'
-                  className='mt-4 inline-flex items-center gap-4 text-xs font-semibold text-gold'
+                    className='inline-flex items-center gap-4 text-xs font-semibold text-gold'
                 >
                   Explore all services <Arrow diagonal />
                 </Link>

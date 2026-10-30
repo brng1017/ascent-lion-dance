@@ -9,8 +9,6 @@ export const homeDefaults = {
     "At Ascent, we bring the spirit of lion dance to life with energy, precision, and passion. Rooted in tradition, our performances celebrate prosperity, strength, and cultural heritage.\n\nFrom Lunar New Year celebrations to life’s biggest milestones, we bring people together through powerful movement and the beat of the drum.",
   storyUrl: "https://ascentliondance.org/about/",
   servicesHeading: "A moment they’ll\nnever forget.",
-  servicesDescription:
-    "Big occasions deserve extraordinary energy. Find the perfect performance for yours.",
   communityHeading: "More than a team.\nA tradition carried forward.",
   communityText:
     "We’re a Denver-based Vietnamese Catholic lion dance team, united by culture, community, and a love of performing. Every practice, every drumbeat, every celebration is part of our story.",

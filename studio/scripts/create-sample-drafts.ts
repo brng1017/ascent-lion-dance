@@ -50,10 +50,19 @@ async function main() {
       ...sample,
       // Sanity generates the ID after this prefix, keeping the document unpublished.
       _id: 'drafts.',
-      body: [{
-        _type: 'block', _key: crypto.randomUUID(), style: 'normal', markDefs: [],
-        children: [{_type: 'span', _key: crypto.randomUUID(), marks: [], text}],
-      }],
+      ...(sample._type === 'page'
+        ? {
+            body: [
+              {
+                _type: 'block',
+                _key: crypto.randomUUID(),
+                style: 'normal',
+                markDefs: [],
+                children: [{_type: 'span', _key: crypto.randomUUID(), marks: [], text}],
+              },
+            ],
+          }
+        : {}),
     })
     console.log(`Created draft ${document._id}: ${sample.title}`)
   }

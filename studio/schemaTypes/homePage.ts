@@ -62,7 +62,6 @@ export const homePage = defineType({
     defineField({name: 'storyText', type: 'text', rows: 7, group: 'story'}),
     defineField({name: 'storyUrl', title: 'Learn more URL', type: 'url', group: 'story'}),
     defineField({name: 'servicesHeading', type: 'string', group: 'services'}),
-    defineField({name: 'servicesDescription', type: 'text', rows: 2, group: 'services'}),
     defineField({
       name: 'featuredServices',
       type: 'array',

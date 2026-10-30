@@ -65,24 +65,6 @@ export type PerformanceService = {
   title?: string;
   slug?: Slug;
   summary?: string;
-  body?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
   eventTypeLabel?: string;
   tagline?: string;
   image?: {
@@ -293,7 +275,6 @@ export type HomePage = {
   storyText?: string;
   storyUrl?: string;
   servicesHeading?: string;
-  servicesDescription?: string;
   featuredServices?: Array<
     {
       _key: string;
@@ -542,7 +523,7 @@ export type SERVICES_PAGE_QUERY_RESULT = {
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: HOME_PAGE_QUERY
-// Query: *[_type == "homePage" && _id == "homePage"][0] {    eyebrow, heroTitle, heroHighlight,    heroImage {asset, alt, hotspot, crop},    storyHeading, storyText, storyUrl, servicesHeading, servicesDescription,    "sponsors": *[_type == "sponsor"] | order(_createdAt asc, _id asc) {      _id, name, website, logo {asset, alt, hotspot, crop}    },    featuredServices[]->{      _id, title, tagline, summary, "slug": slug.current,      image {asset, alt, hotspot, crop}    },    communityHeading, communityText,    communityImage {asset, alt, hotspot, crop},    bookingHeading, bookingDescription, email, phone, instagramUrl  }
+// Query: *[_type == "homePage" && _id == "homePage"][0] {    eyebrow, heroTitle, heroHighlight,    heroImage {asset, alt, hotspot, crop},    storyHeading, storyText, storyUrl, servicesHeading,    "sponsors": *[_type == "sponsor"] | order(_createdAt asc, _id asc) {      _id, name, website, logo {asset, alt, hotspot, crop}    },    featuredServices[]->{      _id, title, tagline, summary, "slug": slug.current,      image {asset, alt, hotspot, crop}    },    communityHeading, communityText,    communityImage {asset, alt, hotspot, crop},    bookingHeading, bookingDescription, email, phone, instagramUrl  }
 export type HOME_PAGE_QUERY_RESULT = {
   eyebrow: string | null;
   heroTitle: string | null;
@@ -557,7 +538,6 @@ export type HOME_PAGE_QUERY_RESULT = {
   storyText: string | null;
   storyUrl: string | null;
   servicesHeading: string | null;
-  servicesDescription: string | null;
   sponsors: Array<{
     _id: string;
     name: string | null;
@@ -672,7 +652,7 @@ declare global {
     '\n  *[_type == "joinPage" && _id == "joinPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, contactHeading, contactText, email\n  }\n': JOIN_PAGE_QUERY_RESULT;
     '\n  *[_type == "aboutPage" && _id == "aboutPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, valuesIntroduction, valuesHeading,\n    lionDanceHeading, lionDanceText,\n    lionDanceImage {asset, alt, hotspot, crop},\n    dragonDanceHeading, dragonDanceText,\n    dragonDanceImage {asset, alt, hotspot, crop},\n    values[]{_key, title, text},\n    journeyHeading, milestones[]{_key, year, text},\n    galleryHeading,\n    galleryImages[]{_key, asset, alt, hotspot, crop},\n  }\n': ABOUT_PAGE_QUERY_RESULT;
     '\n  *[_type == "servicesPage" && _id == "servicesPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    introHeading, introText,\n    bookingSteps[]{_key, title, description},\n    performanceOptions[]{_key, title, image {asset, hotspot, crop}}\n  }\n': SERVICES_PAGE_QUERY_RESULT;
-    '\n  *[_type == "homePage" && _id == "homePage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, storyUrl, servicesHeading, servicesDescription,\n    "sponsors": *[_type == "sponsor"] | order(_createdAt asc, _id asc) {\n      _id, name, website, logo {asset, alt, hotspot, crop}\n    },\n    featuredServices[]->{\n      _id, title, tagline, summary, "slug": slug.current,\n      image {asset, alt, hotspot, crop}\n    },\n    communityHeading, communityText,\n    communityImage {asset, alt, hotspot, crop},\n    bookingHeading, bookingDescription, email, phone, instagramUrl\n  }\n': HOME_PAGE_QUERY_RESULT;
+    '\n  *[_type == "homePage" && _id == "homePage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, storyUrl, servicesHeading,\n    "sponsors": *[_type == "sponsor"] | order(_createdAt asc, _id asc) {\n      _id, name, website, logo {asset, alt, hotspot, crop}\n    },\n    featuredServices[]->{\n      _id, title, tagline, summary, "slug": slug.current,\n      image {asset, alt, hotspot, crop}\n    },\n    communityHeading, communityText,\n    communityImage {asset, alt, hotspot, crop},\n    bookingHeading, bookingDescription, email, phone, instagramUrl\n  }\n': HOME_PAGE_QUERY_RESULT;
     '{\n  "pages": *[_type == "page" && defined(slug.current)] | order(title asc) {\n    _id, title, summary, "slug": slug.current\n  },\n  "services": *[_type == "performanceService" && defined(slug.current)] | order(title asc) {\n    _id, title, summary, "slug": slug.current\n  }\n}': CONTENT_INDEX_QUERY_RESULT;
     '\n  *[_type == "page" && slug.current == $slug][0] {\n    _id, title, summary, body,\n    services[]->{_id, title, summary, "slug": slug.current}\n  }\n': PAGE_QUERY_RESULT;
     '\n  *[_type == "performanceService" && defined(slug.current)] | order(title asc) {\n    _id, title, eventTypeLabel, tagline, summary, "slug": slug.current,\n    image {asset, alt, hotspot, crop}\n  }\n': SERVICES_QUERY_RESULT;

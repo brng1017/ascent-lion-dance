@@ -65,17 +65,6 @@ async function main() {
         tagline: service.tagline,
         summary: service.summary,
         image,
-        body: [
-          {
-            _type: 'block',
-            _key: crypto.randomUUID(),
-            style: 'normal',
-            markDefs: [],
-            children: [
-              {_type: 'span', _key: crypto.randomUUID(), marks: [], text: service.summary},
-            ],
-          },
-        ],
       })
       id = document._id
       console.log(`Created service draft: ${service.title}`)
