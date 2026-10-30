@@ -183,10 +183,24 @@ export type ServicesPage = {
     alt?: string;
     _type: "image";
   };
+  introHeading?: string;
+  introText?: string;
   bookingSteps?: Array<{
     title?: string;
     description?: string;
     _type: "bookingStep";
+    _key: string;
+  }>;
+  performanceOptions?: Array<{
+    title?: string;
+    image?: {
+      asset: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    _type: "performanceOptionItem";
     _key: string;
   }>;
 };
@@ -497,7 +511,7 @@ export type ABOUT_PAGE_QUERY_RESULT = {
 
 // Source: ../web/src/sanity/queries.ts
 // Variable: SERVICES_PAGE_QUERY
-// Query: *[_type == "servicesPage" && _id == "servicesPage"][0] {    eyebrow, heroTitle, heroHighlight,    heroImage {asset, alt, hotspot, crop},    bookingSteps[]{_key, title, description}  }
+// Query: *[_type == "servicesPage" && _id == "servicesPage"][0] {    eyebrow, heroTitle, heroHighlight,    heroImage {asset, alt, hotspot, crop},    introHeading, introText,    bookingSteps[]{_key, title, description},    performanceOptions[]{_key, title, image {asset, hotspot, crop}}  }
 export type SERVICES_PAGE_QUERY_RESULT = {
   eyebrow: string | null;
   heroTitle: string | null;
@@ -508,10 +522,21 @@ export type SERVICES_PAGE_QUERY_RESULT = {
     hotspot: SanityImageHotspot | null;
     crop: SanityImageCrop | null;
   } | null;
+  introHeading: string | null;
+  introText: string | null;
   bookingSteps: Array<{
     _key: string;
     title: string | null;
     description: string | null;
+  }> | null;
+  performanceOptions: Array<{
+    _key: string;
+    title: string | null;
+    image: {
+      asset: SanityImageAssetReference;
+      hotspot: SanityImageHotspot | null;
+      crop: SanityImageCrop | null;
+    } | null;
   }> | null;
 } | null;
 
@@ -673,7 +698,7 @@ declare global {
   interface SanityQueries {
     '\n  *[_type == "joinPage" && _id == "joinPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, contactHeading, contactText, email\n  }\n': JOIN_PAGE_QUERY_RESULT;
     '\n  *[_type == "aboutPage" && _id == "aboutPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, valuesIntroduction, valuesHeading,\n    lionDanceHeading, lionDanceText,\n    lionDanceImage {asset, alt, hotspot, crop},\n    dragonDanceHeading, dragonDanceText,\n    dragonDanceImage {asset, alt, hotspot, crop},\n    values[]{_key, title, text},\n    journeyHeading, milestones[]{_key, year, text},\n    galleryHeading,\n    galleryImages[]{_key, asset, alt, hotspot, crop},\n  }\n': ABOUT_PAGE_QUERY_RESULT;
-    '\n  *[_type == "servicesPage" && _id == "servicesPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    bookingSteps[]{_key, title, description}\n  }\n': SERVICES_PAGE_QUERY_RESULT;
+    '\n  *[_type == "servicesPage" && _id == "servicesPage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    introHeading, introText,\n    bookingSteps[]{_key, title, description},\n    performanceOptions[]{_key, title, image {asset, hotspot, crop}}\n  }\n': SERVICES_PAGE_QUERY_RESULT;
     '\n  *[_type == "homePage" && _id == "homePage"][0] {\n    eyebrow, heroTitle, heroHighlight,\n    heroImage {asset, alt, hotspot, crop},\n    storyHeading, storyText, storyUrl, servicesHeading, servicesDescription,\n    "sponsors": *[_type == "sponsor"] | order(_createdAt asc, _id asc) {\n      _id, name, website, logo {asset, alt, hotspot, crop}\n    },\n    featuredServices[]->{\n      _id, title, tagline, summary, "slug": slug.current,\n      image {asset, alt, hotspot, crop}\n    },\n    communityHeading, communityText,\n    communityImage {asset, alt, hotspot, crop},\n    bookingHeading, bookingDescription, email, phone, instagramUrl\n  }\n': HOME_PAGE_QUERY_RESULT;
     '{\n  "pages": *[_type == "page" && defined(slug.current)] | order(title asc) {\n    _id, title, summary, "slug": slug.current\n  },\n  "services": *[_type == "performanceService" && defined(slug.current)] | order(title asc) {\n    _id, title, summary, "slug": slug.current\n  }\n}': CONTENT_INDEX_QUERY_RESULT;
     '\n  *[_type == "page" && slug.current == $slug][0] {\n    _id, title, summary, body,\n    services[]->{_id, title, summary, "slug": slug.current}\n  }\n': PAGE_QUERY_RESULT;

@@ -3,6 +3,9 @@ export const servicesDefaults = {
   eyebrow: 'Denver, Colorado · Dragon & Lion Dance',
   heroTitle: 'Our',
   heroHighlight: 'Services.',
+  introHeading: 'Rooted in tradition.\nReady for your celebration.',
+  introText:
+    'At Ascent Dragon & Lion Dance, our team brings energy, precision, and a shared love of tradition to every performance. Based in Denver, we bring people together through colorful lions, powerful percussion, and the excitement of live performance.\n\nFrom Lunar New Year and grand openings to weddings, banquets, birthdays, and company events, we help make each occasion memorable. Tell us about your celebration, and we will work with you to plan the performance.',
   bookingSteps: [
     {
       _key: 'request',

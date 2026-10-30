@@ -28,7 +28,9 @@ export const SERVICES_PAGE_QUERY = defineQuery(`
   *[_type == "servicesPage" && _id == "servicesPage"][0] {
     eyebrow, heroTitle, heroHighlight,
     heroImage {asset, alt, hotspot, crop},
-    bookingSteps[]{_key, title, description}
+    introHeading, introText,
+    bookingSteps[]{_key, title, description},
+    performanceOptions[]{_key, title, image {asset, hotspot, crop}}
   }
 `);
 

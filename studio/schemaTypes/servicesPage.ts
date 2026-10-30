@@ -8,7 +8,9 @@ export const servicesPage = defineType({
   icon: SparklesIcon,
   groups: [
     {name: 'hero', title: 'Hero', default: true},
+    {name: 'introduction', title: 'Introduction'},
     {name: 'booking', title: 'How to book'},
+    {name: 'options', title: 'Performance options'},
   ],
   fields: [
     defineField({name: 'eyebrow', title: 'Introduction', type: 'string', group: 'hero'}),
@@ -41,6 +43,14 @@ export const servicesPage = defineType({
         }),
       ],
     }),
+    defineField({name: 'introHeading', title: 'Heading', type: 'string', group: 'introduction'}),
+    defineField({
+      name: 'introText',
+      title: 'Team and services summary',
+      type: 'text',
+      rows: 7,
+      group: 'introduction',
+    }),
     defineField({
       name: 'bookingSteps',
       validation: (rule) => rule.required().length(3),
@@ -62,8 +72,34 @@ export const servicesPage = defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'performanceOptions',
+      title: 'Performance options',
+      type: 'array',
+      group: 'options',
+      description:
+        'Add a title and photograph for each option, then drag items to set their display order. Publish Services Page to update the website.',
+      of: [
+        defineArrayMember({
+          name: 'performanceOptionItem',
+          title: 'Performance option',
+          type: 'object',
+          fields: [
+            defineField({name: 'title', type: 'string', validation: (rule) => rule.required()}),
+            defineField({
+              name: 'image',
+              title: 'Photograph',
+              type: 'image',
+              options: {hotspot: true},
+              validation: (rule) => rule.required().assetRequired(),
+            }),
+          ],
+          preview: {select: {title: 'title', media: 'image'}},
+        }),
+      ],
+    }),
   ],
   preview: {
-    prepare: () => ({title: 'Services Page', subtitle: 'Hero and how to book'}),
+    prepare: () => ({title: 'Services Page', subtitle: 'Hero, introduction, and how to book'}),
   },
 })

@@ -90,11 +90,37 @@ route. The first step always has a "Plan your event" button. There is no
 included-items panel. Home Page and Services Page use matching hero field names
 and the same fixed "Book a show" action.
 
-A sample Services Page draft contains the current copy and a copy of the homepage
-hero image reference. Review it in Studio, then publish it to apply changes to
-the public `/services` page. Until then, matching starter copy and the homepage
-hero image are used. Later edits to the Services Page hero are independent of
-the homepage. Rerun `npx sanity exec scripts/create-services-page.ts --with-user-token`
+Its **Introduction** tab controls the cream section immediately below the hero:
+a heading and team/services summary. Separate paragraphs with a blank line.
+The frontend uses matching starter copy until these fields are published. The
+optional `scripts/add-services-introduction.ts` script fills missing introduction
+fields in a draft, preserving existing editorial content.
+
+**Performance options** are managed in the **Services Page → Performance options**
+tab. Each item has only a title and photograph. Drag items into display order,
+then publish Services Page to apply the list to the website. Use them for Lion
+Dance, Dragon Dance, LED Lion, Benches, Jongs, and other performance elements.
+They do not add event types to the booking form. Items without a title or photo
+are hidden, and an empty published list hides the section.
+
+The five existing options were copied into the Services Page draft, preserving
+image references, crops, and hotspots. A published Services Page was created
+using the previously displayed starter copy, homepage hero photograph, and the
+two already-published options. Pending page edits and the remaining options
+stay in the draft for review. The old standalone documents and schema have been
+removed; the frontend now reads only the ordered page list.
+
+Migration backups are stored under `studio/.sanity/backups`. The one-time
+`scripts/embed-performance-options.mjs` copied the draft list, and
+`scripts/finalize-performance-options.mjs` verified the copies, preserved the
+draft, and atomically created the published page and removed the old records.
+The optional `scripts/create-performance-options.ts` seeds missing starter titles
+into the Services Page draft list without publishing.
+
+Review the Services Page draft in Studio, then publish it to apply pending changes
+to the public `/services` page. The published page has its own hero image
+reference; later homepage edits do not affect it.
+Rerun `npx sanity exec scripts/create-services-page.ts --with-user-token`
 from `studio` if needed; the script preserves an existing Services Page.
 The one-time `scripts/simplify-page-content.ts` cleanup removes the old settings
 from saved page documents and adds the third booking step to a draft without
