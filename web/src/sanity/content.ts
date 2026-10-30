@@ -11,6 +11,10 @@ import {
   SITEMAP_PAGES_QUERY,
 } from './queries';
 
+// Live events handle connected visitors. Timed refreshes also cover edits
+// published before a browser connects, and cached snapshots reused by builds.
+const publishedContentCache = { stale: 30, revalidate: 60, expire: 300 };
+
 export async function getSitemapPages() {
   'use cache';
   const { data } = await sanityFetch({
@@ -30,6 +34,7 @@ export async function getJoinPage() {
     perspective: 'published',
     stega: false,
   });
+  cacheLife(publishedContentCache);
   return data;
 }
 
@@ -40,6 +45,7 @@ export async function getAboutPage() {
     perspective: 'published',
     stega: false,
   });
+  cacheLife(publishedContentCache);
   return data;
 }
 
@@ -50,6 +56,7 @@ export async function getServicesPage() {
     perspective: 'published',
     stega: false,
   });
+  cacheLife(publishedContentCache);
   return data;
 }
 
@@ -60,6 +67,7 @@ export async function getServices() {
     perspective: 'published',
     stega: false,
   });
+  cacheLife(publishedContentCache);
   return data;
 }
 
@@ -70,6 +78,7 @@ export async function getHomePage() {
     perspective: 'published',
     stega: false,
   });
+  cacheLife(publishedContentCache);
   return data;
 }
 
@@ -81,5 +90,6 @@ export async function getPage(slug: string) {
     perspective: 'published',
     stega: false,
   });
+  cacheLife(publishedContentCache);
   return data;
 }

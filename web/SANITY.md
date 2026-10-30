@@ -157,7 +157,15 @@ Editing are not configured.
 
 The frontend uses `next-sanity` Live Content with Next.js Cache Components.
 Cached query helpers live in `src/sanity/content.ts`, and `SanityLive` listens
-for published content changes. See the official
+for published content changes.
+Page content also has a timed fallback: server entries revalidate after 60
+seconds when requested and expire after five minutes. The first request to a
+stale entry can receive its cached response while revalidation runs; after
+expiration the next request waits for fresh content. Client navigation can reuse
+content for 30 seconds. This covers edits published before a visitor connects to
+Sanity Live. The sitemap has its own hourly refresh policy.
+
+See the official
 [Cache Components guide](https://www.sanity.io/docs/nextjs/cache-components).
 
 ## Schema and query changes
