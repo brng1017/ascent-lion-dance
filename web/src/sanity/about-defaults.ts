@@ -7,7 +7,13 @@ export const aboutDefaults = {
   storyText:
     'We are Ascent Dragon & Lion Dance. Through movement, music, and a shared love of our craft, we carry tradition forward and bring our community together.\n\nOur story is still being written. We look forward to sharing more about our beginnings, our team, and the moments that have shaped us.',
   valuesIntroduction: 'What brings us together',
-  valuesHeading: 'More than a performance.',
+  lionDanceHeading: 'Tradition in motion.',
+  dragonDanceHeading: 'Moving as one.',
+  dragonDanceText:
+    'Dragon dance brings a long, colorful dragon to life as a team guides it through flowing patterns, turns, and waves. Each movement depends on the performers working together in rhythm.\n\nAccompanied by lively percussion, the dragon weaves through the celebration in a display of energy, coordination, and community.',
+  lionDanceText:
+    'Lion dance brings a colorful lion to life through coordinated movement and the rhythm of drums, cymbals, and a gong. It is a celebration of culture, community, and good fortune.\n\nFrom a playful greeting to an energetic performance, each dance brings people together to share in the celebration.',
+  valuesHeading: 'What drives us',
   values: [
     {
       _key: 'tradition',
@@ -28,11 +34,25 @@ export const aboutDefaults = {
       text: 'Bringing people together, one performance at a time.',
     },
   ],
-  communityHeading: 'A shared rhythm.\nA place to belong.',
-  communityText:
-    'Behind every performance is a team learning, practicing, and growing together. There is more to come about the people who make Ascent.',
-  email: 'ascentmualan@gmail.com',
-  bookingHeading: 'Celebrate with Ascent.',
-  bookingDescription:
-    'Bring the spirit of lion dance to your next celebration.',
+  journeyHeading: 'Our journey',
+  milestones: [
+    {
+      _key: 'beginnings',
+      _type: 'milestone',
+      year: '[Year]',
+      text: '[Add milestone: our team is founded.]',
+    },
+    {
+      _key: 'first-show',
+      _type: 'milestone',
+      year: '[Year]',
+      text: '[Add milestone: our first major performance.]',
+    },
+    {
+      _key: 'next-chapter',
+      _type: 'milestone',
+      year: '[Year]',
+      text: '[Add milestone: a new chapter for Ascent.]',
+    },
+  ],
 };

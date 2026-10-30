@@ -13,10 +13,14 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
     eyebrow, heroTitle, heroHighlight,
     heroImage {asset, alt, hotspot, crop},
     storyHeading, storyText, valuesIntroduction, valuesHeading,
+    lionDanceHeading, lionDanceText,
+    lionDanceImage {asset, alt, hotspot, crop},
+    dragonDanceHeading, dragonDanceText,
+    dragonDanceImage {asset, alt, hotspot, crop},
     values[]{_key, title, text},
-    communityHeading, communityText,
-    communityImage {asset, alt, hotspot, crop},
-    bookingHeading, bookingDescription, email
+    journeyHeading, milestones[]{_key, year, text},
+    galleryHeading,
+    galleryImages[]{_key, asset, alt, hotspot, crop},
   }
 `);
 
@@ -33,7 +37,9 @@ export const HOME_PAGE_QUERY = defineQuery(`
     eyebrow, heroTitle, heroHighlight,
     heroImage {asset, alt, hotspot, crop},
     storyHeading, storyText, storyUrl, servicesHeading, servicesDescription,
-    sponsors[]->{_id, name, website, logo {asset, alt, hotspot, crop}},
+    "sponsors": *[_type == "sponsor"] | order(_createdAt asc, _id asc) {
+      _id, name, website, logo {asset, alt, hotspot, crop}
+    },
     featuredServices[]->{
       _id, title, tagline, summary, "slug": slug.current,
       image {asset, alt, hotspot, crop}

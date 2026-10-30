@@ -17,18 +17,17 @@ async function main() {
     return
   }
   // Copy image references once; the About page never fetches homepage content at runtime.
-  const images = await client.fetch<{heroImage?: unknown; communityImage?: unknown} | null>(
-    '*[_id == "homePage"][0]{heroImage, communityImage}',
+  const images = await client.fetch<{heroImage?: unknown} | null>(
+    '*[_id == "homePage"][0]{heroImage}',
   )
   await client.createIfNotExists({
     _id: 'drafts.aboutPage',
     _type: 'aboutPage',
     ...aboutDefaults,
     ...(images?.heroImage ? {heroImage: images.heroImage} : {}),
-    ...(images?.communityImage ? {communityImage: images.communityImage} : {}),
   })
   console.log(
-    'Created About Page draft with independent hero, story, values, community, and call to action. Nothing was published.',
+    'Created About Page draft with independent hero, story, dance traditions, values, and journey. Nothing was published.',
   )
 }
 

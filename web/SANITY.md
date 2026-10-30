@@ -58,13 +58,13 @@ The shared logo remains local at `public/images/ascent-logo.png`.
 The celebration ribbon uses the featured service titles automatically.
 
 **Sponsors:** Create Sponsor documents with a company name, an optional logo,
-and an optional website. Add them to Home Page → Our story → Our sponsors in
-display order, then publish the sponsors and homepage. The white banner below
+and an optional website. Publish a sponsor to include it automatically; no
+homepage selection or display-order field is needed. The white banner below
 Our story scrolls continuously and uses the company name when no logo is set.
 It pauses on hover or keyboard focus. Reduced
-motion shows a static, horizontally scrollable list. While the sponsor drafts are
-unpublished, the banner uses the provided names: Hoang Garage, The Do Family,
-Vision Auto, and Re/Max. Publish sponsor documents first, then the updated homepage.
+motion shows a static, horizontally scrollable list. Draft sponsors are hidden.
+When no sponsors are published, the banner shows a sponsorship contact link.
+Unpublish or delete a sponsor to remove it from the banner.
 
 - **Website Page**: title, slug, summary, rich text, and references to performance services.
 - **Performance Service**: title, slug, summary, and rich text.
@@ -102,18 +102,37 @@ publishing editorial changes.
 
 The **About Page** singleton manages `/about` independently: hero introduction,
 headline and photograph; story heading and text; values introduction, heading,
-and ordered cards; community heading, text and photograph; team contact email;
-and call-to-action heading and description. Hero field names and image controls
+and ordered cards; dance introductions and photographs; and journey milestones.
+Hero field names and image controls
 match Home Page and Services Page. Search metadata, navigation destinations, and
 button labels stay in code.
 
 Review and publish About Page in Studio to display its content and images. Before
 publication, the route uses its own starter copy and no photographs. Its seed
-script copies the existing hero and community image references once, preserving
-their crops and alt text; subsequent homepage edits do not affect About Page.
+script copies the existing hero image reference once, preserving
+its crop and alt text; subsequent homepage edits do not affect About Page.
 Run `npx sanity exec scripts/create-about-page.ts --with-user-token` from `studio`
 to seed a missing draft; existing content is preserved. The shared footer still
 uses global contact content from Home Page.
+
+About Page also includes **What is lion dance?** (heading, description, and
+photograph) and **Our journey** (heading and ordered year/description milestones).
+**What is dragon dance?** follows the lion dance section with its own heading,
+description, and photograph controls. The two sections use the same layout.
+The white story section remains separate. Values cards are numbered automatically.
+The timeline is horizontal on desktop and vertical on phones. Replace the marked
+placeholder years and milestones in Studio, then publish About Page. The optional
+`scripts/update-about-sections.ts` script adds missing fields to a draft while
+preserving existing copy and images.
+
+The **Photo gallery** tab on About Page controls the final gallery section.
+Upload or choose images, enter required alternative text,
+and drag photos into display order. Crops and hotspots control grid thumbnails.
+Publish About Page to apply changes. The responsive grid shows one, two, or three
+columns, and each photo opens in a full-screen viewer with looping previous/next
+arrows. Click the backdrop, the close button, or press Escape to close; keyboard
+arrow keys cycle photos. Empty galleries are
+hidden; no starter photos are added automatically.
 
 The **Join Page** singleton manages `/join` independently. It has the same hero
 fields as the other pages, a short introduction heading and text, and a contact

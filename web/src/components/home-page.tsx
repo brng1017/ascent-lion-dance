@@ -5,9 +5,8 @@ import type { HOME_PAGE_QUERY_RESULT } from '../../sanity.types';
 import {
   homeDefaults,
   serviceDefaults,
-  sponsorDefaults,
 } from '@/sanity/home-defaults';
-import { imageUrl } from '@/sanity/image';
+import { imageUrl, logoUrl } from '@/sanity/image';
 import { SiteHeader } from './site-header';
 import { PageHero } from './page-hero';
 import { ServicesCarousel } from './services-carousel';
@@ -73,16 +72,14 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
             name: sponsor.name,
             website: sponsor.website,
             logo: sponsor.logo?.asset
-              ? imageUrl(sponsor.logo, 480, 160, 'max')
+              ? logoUrl(sponsor.logo)
               : undefined,
             logoAlt: sponsor.logo?.alt ?? sponsor.name,
           },
         ]
       : [],
   );
-  const sponsors: Sponsor[] = publishedSponsors.length
-    ? publishedSponsors
-    : sponsorDefaults.map((name, index) => ({ id: `starter-${index}`, name }));
+  const sponsors: Sponsor[] = publishedSponsors;
   const services = publishedServices.length
     ? publishedServices.map((service) => ({
         key: service._id,

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 import { PageHero } from '@/components/page-hero';
+import { PhotoGallery } from '@/components/photo-gallery';
 import { SiteHeader } from '@/components/site-header';
 import { getAboutPage } from '@/sanity/content';
 import { aboutDefaults } from '@/sanity/about-defaults';
@@ -19,9 +19,27 @@ export default async function AboutPage() {
   const heroImage = content?.heroImage?.asset
     ? imageUrl(content.heroImage, 1920, 1280)
     : null;
-  const communityImage = content?.communityImage?.asset
-    ? imageUrl(content.communityImage, 1200, 1000)
+  const lionDanceImage = content?.lionDanceImage?.asset
+    ? imageUrl(content.lionDanceImage, 1200, 900)
     : null;
+  const lionDanceHeading =
+    content && content.lionDanceHeading !== null
+      ? content.lionDanceHeading
+      : aboutDefaults.lionDanceHeading;
+  const lionDanceText =
+    content && content.lionDanceText !== null
+      ? content.lionDanceText
+      : aboutDefaults.lionDanceText;
+  const milestones = content?.milestones ?? aboutDefaults.milestones;
+  const galleryImages =
+    content?.galleryImages?.filter((photo) => photo.asset) ?? [];
+  const dragonDanceImage = content?.dragonDanceImage?.asset
+    ? imageUrl(content.dragonDanceImage, 1200, 900)
+    : null;
+  const dragonDanceHeading =
+    content?.dragonDanceHeading ?? aboutDefaults.dragonDanceHeading;
+  const dragonDanceText =
+    content?.dragonDanceText ?? aboutDefaults.dragonDanceText;
 
   return (
     <>
@@ -67,6 +85,90 @@ export default async function AboutPage() {
         </section>
 
         <section
+          aria-labelledby='lion-dance-heading'
+          className='mx-auto grid max-w-312 items-center gap-10 px-6 pt-20 md:grid-cols-2 md:gap-16 md:pt-24 lg:px-10 lg:pt-28'
+        >
+          <div>
+            <p className='mb-5 text-[10px] font-bold tracking-[.24em] text-gold uppercase'>
+              What is lion dance?
+            </p>
+            <h2
+              id='lion-dance-heading'
+              className='font-display text-[clamp(2.4rem,4.5vw,3.7rem)] leading-[1.08] whitespace-pre-line uppercase'
+            >
+              {lionDanceHeading}
+            </h2>
+            <div className='mt-6 space-y-4 font-body text-sm leading-7 text-white/70'>
+              {lionDanceText?.split(/\n\s*\n/).map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+          <div className='relative aspect-[4/3] overflow-hidden rounded-2xl bg-ink-light'>
+            {lionDanceImage ? (
+              <Image
+                src={lionDanceImage}
+                alt={content?.lionDanceImage?.alt ?? ''}
+                fill
+                sizes='(max-width: 767px) 100vw, 50vw'
+                className='object-cover'
+              />
+            ) : (
+              <div
+                aria-hidden='true'
+                className='absolute inset-0 flex items-end bg-[repeating-linear-gradient(135deg,transparent,transparent_12px,#ffffff05_12px,#ffffff05_24px)] p-5'
+              >
+                <span className='text-[10px] tracking-wide text-white/40'>
+                  Lion dance photograph
+                </span>
+              </div>
+            )}
+          </div>
+        </section>
+
+        <section
+          aria-labelledby='dragon-dance-heading'
+          className='mx-auto grid max-w-312 items-center gap-10 px-6 pt-20 md:grid-cols-2 md:gap-16 md:pt-24 lg:px-10 lg:pt-28'
+        >
+          <div className='md:order-2'>
+            <p className='mb-5 text-[10px] font-bold tracking-[.24em] text-gold uppercase'>
+              What is dragon dance?
+            </p>
+            <h2
+              id='dragon-dance-heading'
+              className='font-display text-[clamp(2.4rem,4.5vw,3.7rem)] leading-[1.08] whitespace-pre-line uppercase'
+            >
+              {dragonDanceHeading}
+            </h2>
+            <div className='mt-6 space-y-4 font-body text-sm leading-7 text-white/70'>
+              {dragonDanceText?.split(/\n\s*\n/).map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+          <div className='relative aspect-[4/3] overflow-hidden rounded-2xl bg-ink-light md:order-1'>
+            {dragonDanceImage ? (
+              <Image
+                src={dragonDanceImage}
+                alt={content?.dragonDanceImage?.alt ?? ''}
+                fill
+                sizes='(max-width: 767px) 100vw, 50vw'
+                className='object-cover'
+              />
+            ) : (
+              <div
+                aria-hidden='true'
+                className='absolute inset-0 flex items-end bg-[repeating-linear-gradient(135deg,transparent,transparent_12px,#ffffff05_12px,#ffffff05_24px)] p-5'
+              >
+                <span className='text-[10px] tracking-wide text-white/40'>
+                  Dragon dance photograph
+                </span>
+              </div>
+            )}
+          </div>
+        </section>
+
+        <section
           aria-labelledby='our-values-heading'
           className='mx-auto max-w-312 px-6 py-20 md:py-24 lg:px-10 lg:py-28'
         >
@@ -80,13 +182,18 @@ export default async function AboutPage() {
             {page.valuesHeading}
           </h2>
           <div className='mt-10 grid gap-5 md:grid-cols-3'>
-            {(page.values ?? []).map((value) => (
+            {(page.values ?? []).map((value, index) => (
               <div
                 key={value._key}
                 className='rounded-2xl border border-white/5 bg-ink-light p-7 lg:p-8'
               >
-                <div aria-hidden='true' className='mb-8 h-px w-10 bg-crimson' />
-                <h3 className='font-display text-3xl text-gold uppercase'>
+                <p
+                  aria-hidden='true'
+                  className='mb-9 font-display text-3xl text-crimson'
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </p>
+                <h3 className='font-display text-2xl uppercase'>
                   {value.title}
                 </h3>
                 <p className='mt-4 font-body text-sm leading-7 text-white/70'>
@@ -97,71 +204,71 @@ export default async function AboutPage() {
           </div>
         </section>
 
-        <section
-          aria-labelledby='our-team-heading'
-          className={`mx-auto mb-20 grid max-w-312 overflow-hidden bg-ink-light sm:mx-6 sm:rounded-2xl lg:mx-auto ${communityImage ? 'md:grid-cols-2' : ''}`}
-        >
-          {communityImage && (
-            <div className='relative min-h-80 md:min-h-105'>
-              <Image
-                src={communityImage}
-                alt={content?.communityImage?.alt ?? ''}
-                fill
-                sizes='(max-width: 767px) 100vw, 50vw'
-                className='object-cover'
-              />
-              <div className='absolute inset-0 bg-linear-to-t from-ink/40 to-transparent' />
-            </div>
-          )}
-          <div className='flex flex-col justify-center px-7 py-12 lg:px-14'>
-            <p className='mb-5 text-[10px] font-bold tracking-[.24em] text-gold uppercase'>
-              The Ascent family
-            </p>
+        {milestones.length > 0 && (
+          <section
+            aria-labelledby='journey-heading'
+            className='mx-auto max-w-312 px-6 pb-20 md:pb-24 lg:px-10 lg:pb-28'
+          >
             <h2
-              id='our-team-heading'
-              className='font-display text-3xl leading-[1.12] whitespace-pre-line uppercase lg:text-[39px]'
+              id='journey-heading'
+              className='font-display text-[clamp(2.4rem,4.5vw,3.7rem)] leading-[1.08] uppercase'
             >
-              {page.communityHeading}
+              {content?.journeyHeading ?? aboutDefaults.journeyHeading}
             </h2>
-            <p className='mt-5 font-body text-[13px] leading-7 text-white/65'>
-              {page.communityText}
-            </p>
-            <Link
-              href='/join'
-              className='mt-7 inline-flex min-h-11 w-fit items-center gap-6 text-xs font-semibold text-gold hover:text-white'
-            >
-              Join our story <span aria-hidden='true'>↗</span>
-            </Link>
-          </div>
-        </section>
+            <ol className='mt-10 grid md:grid-flow-col md:auto-cols-fr'>
+              {milestones.map((milestone) => (
+                <li
+                  key={milestone._key}
+                  className='relative border-l border-white/15 pb-8 pl-7 last:pb-0 md:border-t md:border-l-0 md:pt-7 md:pr-8 md:pb-0 md:pl-0'
+                >
+                  <span
+                    aria-hidden='true'
+                    className='absolute top-1 -left-1 size-2 rounded-full bg-gold md:-top-1 md:left-0'
+                  />
+                  <h3 className='font-display text-2xl text-gold'>
+                    {milestone.year}
+                  </h3>
+                  <p className='mt-3 max-w-xs font-body text-sm leading-7 text-white/70'>
+                    {milestone.text}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
 
-        <section
-          aria-labelledby='celebrate-heading'
-          className='mx-6 mb-20 max-w-312 rounded-2xl bg-crimson px-7 py-12 sm:px-12 sm:py-14 lg:mx-auto'
-        >
-          <div className='flex flex-col justify-between gap-9 md:flex-row md:items-end'>
-            <div>
-              <p className='mb-5 text-[10px] font-semibold tracking-[.24em] uppercase'>
-                Make a memory
-              </p>
-              <h2
-                id='celebrate-heading'
-                className='font-display text-[clamp(2.7rem,5.5vw,5rem)] leading-[1.08] uppercase'
-              >
-                {page.bookingHeading}
-              </h2>
-              <p className='mt-5 max-w-sm font-body text-xs leading-7 text-white/85'>
-                {page.bookingDescription}
-              </p>
-            </div>
-            <Link
-              href='/services'
-              className='inline-flex min-h-12 w-fit shrink-0 items-center gap-8 rounded-full bg-ink px-7 py-5 text-xs font-bold transition-colors hover:bg-ink-light'
+        {galleryImages.length > 0 && (
+          <section
+            aria-labelledby='gallery-heading'
+            className='mx-auto max-w-312 px-6 pb-20 md:pb-24 lg:px-10 lg:pb-28'
+          >
+            <h2
+              id='gallery-heading'
+              className='font-display text-[clamp(2.4rem,4.5vw,3.7rem)] leading-[1.08] uppercase'
             >
-              Explore our services <span aria-hidden='true'>↗</span>
-            </Link>
-          </div>
-        </section>
+              {content?.galleryHeading || 'Photo gallery'}
+            </h2>
+            <PhotoGallery
+              photos={galleryImages.map((photo) => ({
+                id: photo._key,
+                thumbnail: imageUrl(photo, 900, 675),
+                fullSize: imageUrl(photo, 2400, 2400, 'max'),
+                alt: photo.alt ?? '',
+              }))}
+            />
+            <div className='mt-10 flex justify-center'>
+              <a
+                href='https://www.instagram.com/ascent.ld/'
+                target='_blank'
+                rel='noreferrer'
+                aria-label='More photos on Instagram (opens in a new tab)'
+                className='inline-flex min-h-12 items-center gap-8 rounded-full bg-crimson px-7 py-4 text-xs font-bold text-white transition-colors hover:bg-crimson-light'
+              >
+                More <span aria-hidden='true'>↗</span>
+              </a>
+            </div>
+          </section>
+        )}
       </main>
     </>
   );

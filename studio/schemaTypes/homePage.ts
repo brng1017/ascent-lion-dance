@@ -61,16 +61,6 @@ export const homePage = defineType({
     defineField({name: 'storyHeading', type: 'string', group: 'story'}),
     defineField({name: 'storyText', type: 'text', rows: 7, group: 'story'}),
     defineField({name: 'storyUrl', title: 'Learn more URL', type: 'url', group: 'story'}),
-    defineField({
-      name: 'sponsors',
-      title: 'Our sponsors',
-      type: 'array',
-      group: 'story',
-      of: [defineArrayMember({type: 'reference', to: [{type: 'sponsor'}]})],
-      validation: (rule) => rule.unique(),
-      description:
-        'Sponsors in banner order. Publish the sponsor documents to display them below Our story.',
-    }),
     defineField({name: 'servicesHeading', type: 'string', group: 'services'}),
     defineField({name: 'servicesDescription', type: 'text', rows: 2, group: 'services'}),
     defineField({
