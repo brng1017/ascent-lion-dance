@@ -9,6 +9,10 @@ Tailwind CSS, and published content comes from the standalone Sanity Studio in
 Install dependencies with npm ci, then copy .env.example to .env.local and
 run npm run dev. Open http://localhost:3000.
 
+Use Node.js 24, as specified in `.nvmrc`. Netlify's base directory must be `web`
+so it reads that file before installing dependencies. Keep any Netlify
+`NODE_VERSION` environment variable set to `24` as well.
+
 On Windows with restricted PowerShell execution, use npm.cmd and npx.cmd.
 
 ## Checks and production build
