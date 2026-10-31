@@ -1,0 +1,8 @@
+[build]
+  base = "web"
+  command = "npm run build"
+  # File-based publish paths are relative to the base directory.
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "24"
