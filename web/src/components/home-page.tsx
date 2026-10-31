@@ -2,6 +2,7 @@ import { Arrow } from './arrow';
 import Image from 'next/image';
 import { siteConfig } from '@/config/site';
 import Link from 'next/link';
+import { FaAsterisk } from 'react-icons/fa';
 import type { HOME_PAGE_QUERY_RESULT } from '../../sanity.types';
 import { homeDefaults } from '@/sanity/home-defaults';
 import { performanceServiceDefaults } from '@/sanity/performance-service-defaults';
@@ -103,7 +104,7 @@ export function HomePage({ content }: { content: HOME_PAGE_QUERY_RESULT }) {
                 {services.map((service) => (
                   <span key={service.key} className='flex items-center gap-8'>
                     {service.title}
-                    <span className='text-gold'>✳</span>
+                    <FaAsterisk aria-hidden='true' className='size-4 shrink-0 text-gold' />
                   </span>
                 ))}
               </div>

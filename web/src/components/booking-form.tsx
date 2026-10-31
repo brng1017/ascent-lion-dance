@@ -5,8 +5,8 @@ import emailjs from '@emailjs/browser';
 import { Arrow } from './arrow';
 
 const inputClass =
-  'mt-2 min-h-12 w-full rounded-lg border border-white/10 bg-ink px-4 py-3 font-body text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-gold focus-visible:outline-none! disabled:opacity-60 [color-scheme:dark]';
-const labelClass = 'block text-[11px] font-medium text-white/75';
+  'mt-2 block min-h-12 w-full min-w-0 max-w-full rounded-lg border border-white/10 bg-ink px-4 py-3 font-body text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-gold focus-visible:outline-none! disabled:opacity-60 [color-scheme:dark]';
+const labelClass = 'block min-w-0 text-[11px] font-medium text-white/75';
 
 type BookingFormProps = {
   services: string[];
@@ -135,7 +135,7 @@ export function BookingForm({
       onSubmit={handleSubmit}
       aria-labelledby='booking-form-heading'
       aria-busy={status === 'sending'}
-      className='rounded-2xl border border-white/5 bg-ink-light p-6 sm:p-8 lg:p-10'
+      className='min-w-0 rounded-2xl border border-white/5 bg-ink-light p-6 sm:p-8 lg:p-10'
     >
       <div aria-hidden='true' className='mb-7 h-0.5 bg-gold' />
       <div className='mb-7 flex flex-wrap items-baseline justify-between gap-3'>
@@ -161,7 +161,7 @@ export function BookingForm({
       </div>
       <fieldset
         disabled={status === 'sending'}
-        className='grid gap-5 sm:grid-cols-2'
+        className='grid min-w-0 grid-cols-1 gap-5 sm:grid-cols-2'
       >
         <legend className='sr-only'>Contact and event information</legend>
         <label className={labelClass} htmlFor='booking-first-name'>
